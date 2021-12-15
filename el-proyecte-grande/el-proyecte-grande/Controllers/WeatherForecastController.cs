@@ -5,6 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+/// <summary>
+/// this file was auto genreted and we can use it as an exaple for our first controller
+/// basicly this is auto generated and its the starting point
+///  :*
+/// </summary>
+
 namespace el_proyecte_grande.Controllers
 {
     [ApiController]
