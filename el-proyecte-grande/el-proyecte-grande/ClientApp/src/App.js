@@ -7,6 +7,10 @@ import { Counter } from './components/Counter';
 
 import './custom.css'
 
+/// index.js injects this app file into the index html
+
+/// this renders different layouts with components based on the route
+/// as this app.js  is the only page ever loaded
 export default class App extends Component {
   static displayName = App.name;
 
