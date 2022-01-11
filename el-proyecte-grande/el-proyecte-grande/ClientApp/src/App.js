@@ -24,3 +24,11 @@ export default class App extends Component {
     );
   }
 }
+
+
+
+///#D468B2
+///#FF7125
+///#08032F
+///#4985F4
+///#BEBEDB
