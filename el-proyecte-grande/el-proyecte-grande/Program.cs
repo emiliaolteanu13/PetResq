@@ -22,14 +22,18 @@ namespace el_proyecte_grande
     {
         public static void Main(string[] args)
         {
-            var prayerService = new PetService();
+            var postService = new PostService();
+            var userService = new UserService();
             var options = new DbContextOptionsBuilder<PetContext>().UseSqlServer("Server=DESKTOP-MS9HR0B; Initial Catalog=PetRescue;Integrated Security=true;").Options;
             using var db = new PetContext(options);
             //db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
-            //var prayers = prayerService.PopulatePrayerDB();
-            //db.Prayers.AddRange(prayers);
+            //var posts = postService.PopulatePetRescueDB();
+            //db.Posts.AddRange(posts);
             //db.SaveChanges();
+            var users = userService.PopulatePetRescueDB();
+            db.Users.AddRange(users);
+            db.SaveChanges();
             CreateHostBuilder(args).Build().Run();
         }
 
