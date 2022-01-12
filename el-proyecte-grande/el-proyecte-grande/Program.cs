@@ -1,4 +1,7 @@
+using el_proyecte_grande.DAL;
+using el_proyecte_grande.EntityFramework;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -19,6 +22,14 @@ namespace el_proyecte_grande
     {
         public static void Main(string[] args)
         {
+            var prayerService = new PetService();
+            var options = new DbContextOptionsBuilder<PetContext>().UseSqlServer("Server=DESKTOP-MS9HR0B; Initial Catalog=PetRescue;Integrated Security=true;").Options;
+            using var db = new PetContext(options);
+            //db.Database.EnsureDeleted();
+            db.Database.EnsureCreated();
+            //var prayers = prayerService.PopulatePrayerDB();
+            //db.Prayers.AddRange(prayers);
+            //db.SaveChanges();
             CreateHostBuilder(args).Build().Run();
         }
 
