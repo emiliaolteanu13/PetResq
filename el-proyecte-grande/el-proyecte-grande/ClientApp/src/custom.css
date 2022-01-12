@@ -14,7 +14,6 @@
 * {
   margin: 0;
   font-family: "Quicksand";
-  color: #08032F;
   font-size: large;
 }
 
@@ -49,10 +48,13 @@
   border-radius: 10px;
 }
 
-.content {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-}
 
 /* Home Style */
+
+.home {
+  background-color: aqua;
+}
+
+.home a{
+  background-color: brown;
+}
