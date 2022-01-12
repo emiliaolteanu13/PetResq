@@ -1,14 +1,58 @@
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+
+/* 
+///#D468B2
+///#FF7125
+///#08032F
+///#4985F4
+///#BEBEDB
+*/
+
+
+/* base styles */
+* {
+  margin: 0;
+  font-family: "Quicksand";
+  color: #08032F;
+  font-size: large;
 }
 
-code {
-  color: #E01A76;
+/* Navbar Style */
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #FF7125;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.navbar a {
+  font-weight: bold;
+  color: #08032F;
+  margin-left: 20px;
+  text-decoration: none;
+  padding: 6px;
 }
+
+.navbar a:hover {
+  font-weight: bold;
+  background-color: #4985F4;
+  color: #FF7125;
+  text-decoration-color: #FF7125;
+  margin-left: 20px;
+  padding: 6px;
+  border-radius: 10px;
+}
+
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Home Style */
