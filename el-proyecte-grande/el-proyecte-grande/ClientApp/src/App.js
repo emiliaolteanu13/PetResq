@@ -3,7 +3,10 @@ import { Route } from 'react-router';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
+import { PetsForAdoption } from "./components/PetsForAdoption";
 import { NotFound } from './components/NotFound';
+import { Provider } from 'react-redux';
+import { store } from "./actions/store";
 
 import './custom.css'
 
@@ -20,6 +23,11 @@ export default class App extends Component {
         <Layout />
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/find'>
+            <Provider store={store}>
+              <PetsForAdoption/>
+            </Provider>
+          </Route>
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

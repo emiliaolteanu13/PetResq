@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component,useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
+import * as actions from "../actions/posts";
 
 export class Home extends Component {
   static displayName = Home.name;

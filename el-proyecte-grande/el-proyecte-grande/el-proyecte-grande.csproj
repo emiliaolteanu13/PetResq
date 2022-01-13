@@ -8,6 +8,7 @@
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <RootNamespace>el_proyecte_grande</RootNamespace>
+    <UserSecretsId>b30bc5a9-12ee-4e1f-9e0a-dcbca1d9a7d8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
