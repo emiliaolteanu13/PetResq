@@ -30,8 +30,8 @@ namespace el_proyecte_grande
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
-            services.AddDbContext<PetContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PetRescue:SQLServer")));
-
+            services.AddDbContext<PetContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PetRescue")));
+            
 
             services.AddControllersWithViews();
 
