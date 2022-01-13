@@ -8,7 +8,7 @@ export const ACTION_TYPES = {
 }
 
 export const fetchAll = () => dispatch => {
-    api.dCandidate().fetchAll()
+    api.posts().fetchAll()
         .then(response => {
             dispatch({
                 type: ACTION_TYPES.FETCH_ALL,
@@ -19,8 +19,7 @@ export const fetchAll = () => dispatch => {
 }
 
 export const create = (data, onSuccess) => dispatch => {
-    data = formateData(data);
-    api.dCandidate().create(data)
+    api.posts().create(data)
         .then(res=>{
             dispatch({
                 type:ACTION_TYPES.CREATE,
@@ -32,8 +31,7 @@ export const create = (data, onSuccess) => dispatch => {
 }
 
 export const update = (id, data, onSuccess) => dispatch => {
-    data = formateData(data);
-    api.dCandidate().update(id, data)
+    api.posts().update(id, data)
         .then(res=>{
             dispatch({
                 type:ACTION_TYPES.UPDATE,
@@ -45,7 +43,7 @@ export const update = (id, data, onSuccess) => dispatch => {
 }
 
 export const Delete = (id, onSuccess) => dispatch => {
-    api.dCandidate().delete(id)
+    api.posts().delete(id)
         .then(res=>{
             dispatch({
                 type:ACTION_TYPES.DELETE,
