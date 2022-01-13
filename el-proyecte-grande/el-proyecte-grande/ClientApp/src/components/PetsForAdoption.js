@@ -7,7 +7,6 @@ const PetsForAdoption = () => {
     const [pets, setPets] = useState({});
     useEffect(() =>{
         setPets(actions.fetchAll);
-        console.log(actions.fetchAll)
     })
 
     return ( 
@@ -15,14 +14,5 @@ const PetsForAdoption = () => {
      );
 }
  
-
-const mapStateToProps = state => ({
-    petsList: state.PetsForAdoption.list
-})
-
-const mapActionToProps = {
-    fetchAllPosts: actions.fetchAll,
-    //deleteDCandidate: actions.Delete
-}
 
 export default PetsForAdoption;

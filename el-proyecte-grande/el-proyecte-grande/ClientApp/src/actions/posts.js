@@ -1,4 +1,5 @@
-import api from "./api"
+import api from "./api";
+import { useEffect } from "react";
 
 export const ACTION_TYPES = {
     CREATE: 'CREATE',
@@ -7,13 +8,13 @@ export const ACTION_TYPES = {
     FETCH_ALL: 'FETCH_ALL'
 }
 
-export const fetchAll = () => dispatch => {
+
+export const fetchAll = () => {
+    
     api.posts().fetchAll()
         .then(response => {
-            dispatch({
-                type: ACTION_TYPES.FETCH_ALL,
-                payload: response.data
-            })
+            console.log(response);
+            
         })
         .catch(err => console.log(err))
 }
