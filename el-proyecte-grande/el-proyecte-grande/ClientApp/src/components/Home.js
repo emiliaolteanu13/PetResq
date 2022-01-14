@@ -11,7 +11,7 @@ export class Home extends Component {
     const mystyle = {
       color: "white",
       backgroundColor: "#BEBEDB",
-      marginTop: "0px",
+      marginTop: "-40px",
       padding: "10em",
       display: "flex"
     }
@@ -28,6 +28,7 @@ export class Home extends Component {
       <div className='home' style={mystyle}>
       <Link to="/find" style={linkStyle}>Adopt an Animal</Link>
       <Link to="/create" style={linkStyle}>Make a post</Link>
+      <Link to="/ce" style={linkStyle}>Lost an animal</Link>
       </div>
     );
   }

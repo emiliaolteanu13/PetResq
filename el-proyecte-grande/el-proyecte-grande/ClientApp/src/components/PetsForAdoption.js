@@ -9,9 +9,18 @@ const PetsForAdoption = () => {
         setPets(actions.fetchAll);
     })
 
+    const Pets = ["dog", "cat", "soon will be happy"]
+
     return ( 
-        <div className="pets">works</div>
-     );
+    <>
+       {
+        Pets.map((pet) => (
+            <div>
+                <h2> {pet} </h2>
+            </div>))
+       } 
+        
+    </>);
 }
  
 
