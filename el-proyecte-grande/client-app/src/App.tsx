@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import axios from 'axios';
-import { ListFormat } from 'typescript';
-import { Header, List } from 'semantic-ui-react';
+import { Icon, Header, List } from 'semantic-ui-react';
+
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -15,8 +15,8 @@ function App() {
   }, []) // add array of dependencies to stop the loop
 
   return (
-    <div className="App">
-      <header>
+    <div>
+      <Header as='h2' icon='users' content='Posts' />
         {/*<img src={logo} className="App-logo" alt="logo" />*/}
         <List>
         {posts.map((post:any) => (
@@ -25,7 +25,7 @@ function App() {
             </List.Item>
           ))}
         </List>
-      </header>
+      
     </div>
   );
 }
