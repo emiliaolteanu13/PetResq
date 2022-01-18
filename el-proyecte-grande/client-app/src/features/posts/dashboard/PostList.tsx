@@ -25,8 +25,8 @@ export default function PostList({posts}:Props) {
                             </Item.Description>
                             <Item.Extra>
                                 <Button floated='right' content='View' color='blue'/>
-                                <Label basic content={convertPetType(post.petType)} />
-                                <Label basic content={convertStatusType(post.statusType)} /> {/*de aflat cum facem sa afisam tagul ca string din enum*/}
+                                <Label basic content={post.petType} />
+                                <Label basic content={post.statusType} /> {/*de aflat cum facem sa afisam tagul ca string din enum*/}
                             </Item.Extra>
                         </Item.Content>
                     </Item>

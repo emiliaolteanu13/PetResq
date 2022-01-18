@@ -15,7 +15,9 @@ export default function PostDashboard({posts}: Props) {
                 <PostList posts={posts}/>
             </Grid.Column>
             <Grid.Column width="6">
+                {posts[0] && 
                 <PostDetails post={posts[0]} />
+}
             </Grid.Column>
         </Grid>
     )

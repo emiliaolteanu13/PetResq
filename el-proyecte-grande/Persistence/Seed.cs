@@ -43,8 +43,9 @@ namespace Persistence
                     UserID = Guid.NewGuid(),
                     Title = "Lost Dog",
                     Description = "Lost around Piata Romana last night, its a black and white dalmatian",
-                    PetType = PetType.DOG,
-                    StatusType = StatusType.LOST
+                    PetType = PetType.DOG.ToString(),
+                    StatusType = StatusType.LOST.ToString(),
+                    Date = DateTime.Now
                 
                 },
                 new Post
@@ -53,9 +54,9 @@ namespace Persistence
                     UserID = Guid.NewGuid(),
                     Title = "Found Dog",
                     Description = "Found a dirty Dalmatian, under the mud he was black and white, and his name tag says: Cruella",
-                    PetType = PetType.DOG,
-                    StatusType = StatusType.FOUND
-                
+                    PetType = PetType.DOG.ToString(),
+                    StatusType = StatusType.FOUND.ToString(),
+                    Date = DateTime.Now
                 }
                 
             };
