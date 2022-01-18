@@ -4,6 +4,7 @@ export interface Post {
     userID: string;
     title: string;
     description: string;
-    petType: number;
-    statusType: number;
+    petType: string;
+    statusType: string;
+    date: string;
 }

@@ -13,8 +13,9 @@ namespace Domain
         public Guid UserID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public PetType PetType { get; set; }
-        public StatusType StatusType { get; set; }
+        public string PetType { get; set; }
+        public string StatusType { get; set; }
+        public DateTime Date {get;set;}
     }
     
 }
