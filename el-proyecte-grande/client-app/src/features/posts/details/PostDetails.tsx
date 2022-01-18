@@ -1,12 +1,15 @@
 import React from "react";
-import { Button, Card, Icon, Image } from "semantic-ui-react";
+import { Button, Card, Image } from "semantic-ui-react";
 import { Post } from "../../../app/layout/model/post";
 
 interface Props {
-    post: Post
+    post: Post;
+    cancelSelectPost: () => void;
+    openForm: (id: string)=> void;
+
 }
 
-export default function PostDetails ({ post }: Props) {
+export default function PostDetails ({ post, cancelSelectPost, openForm }: Props) {
     return (
         <Card fluid>
             {/*<Image src={`/assets/${petPhoto.postId}.jpg`} ceva de genul, si sa adaugam interfata sus />*/}
@@ -14,7 +17,7 @@ export default function PostDetails ({ post }: Props) {
             <Card.Content>
                 <Card.Header>{post.title}</Card.Header>
                 <Card.Meta>
-                    <span>data postarii</span> {/*{post.date}*/}
+                    <span>{post.date}</span>
                 </Card.Meta>
                 <Card.Description>
                     {post.description}
@@ -22,8 +25,8 @@ export default function PostDetails ({ post }: Props) {
             </Card.Content>
             <Card.Content extra>
             <Button.Group widths='2'>
-                <Button basic color='blue' content='Edit' />
-                <Button basic color='grey' content='Cancel' />
+                <Button onClick={() => openForm(post.id)}basic color='blue' content='Edit' />
+                <Button onClick={cancelSelectPost} basic color='grey' content='Cancel' />
             </Button.Group>
             </Card.Content>
         </Card>

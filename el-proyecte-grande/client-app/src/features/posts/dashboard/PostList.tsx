@@ -6,9 +6,11 @@ import { Post } from "../../../app/layout/model/post";
 
 interface Props {
     posts: Post[];
+    selectPost: (id: string) => void;
+    deletePost: (id: string)=> void;
 }
 
-export default function PostList({posts}:Props) {
+export default function PostList({posts, selectPost, deletePost}:Props) {
     console.log(posts)
     return (
         <Segment>
@@ -23,9 +25,10 @@ export default function PostList({posts}:Props) {
                                 <div>{post.location}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button floated='right' content='View' color='blue'/>
+                                <Button onClick={()=> selectPost(post.id)} floated='right' content='View' color='blue'/>
+                                <Button onClick={()=> deletePost(post.id)} floated='right' content='Delete' color='red'/>
                                 <Label basic content={post.petType} />
-                                <Label basic content={post.statusType} /> {/*de aflat cum facem sa afisam tagul ca string din enum*/}
+                                <Label basic content={post.statusType} />
                             </Item.Extra>
                         </Item.Content>
                     </Item>
