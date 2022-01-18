@@ -29,8 +29,8 @@ namespace Persistence.Migrations
                     UserID = table.Column<Guid>(type: "TEXT", nullable: false),
                     Title = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    PetType = table.Column<int>(type: "INTEGER", nullable: false),
-                    StatusType = table.Column<int>(type: "INTEGER", nullable: false)
+                    PetType = table.Column<int>(type: "STRING", nullable: false),
+                    StatusType = table.Column<int>(type: "STRING", nullable: false)
                 },
                 constraints: table =>
                 {

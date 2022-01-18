@@ -1,4 +1,5 @@
-﻿
+﻿using System.Runtime.Serialization;
+
 namespace Domain
 {
     public enum StatusType

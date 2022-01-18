@@ -1,4 +1,6 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace Domain
@@ -14,4 +16,5 @@ namespace Domain
         public PetType PetType { get; set; }
         public StatusType StatusType { get; set; }
     }
+    
 }
