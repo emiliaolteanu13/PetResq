@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { Post } from "../../../app/layout/model/post";
-
+import {convertPetType, convertStatusType} from "../../../app/layout/convertIntegerToStringEnumValue";
 
 
 
@@ -25,8 +25,8 @@ export default function PostList({posts}:Props) {
                             </Item.Description>
                             <Item.Extra>
                                 <Button floated='right' content='View' color='blue'/>
-                                <Label basic content={post.petType} />
-                                <Label basic content={post.statusType} /> {/*de aflat cum facem sa afisam tagul ca string din enum*/}
+                                <Label basic content={convertPetType(post.petType)} />
+                                <Label basic content={convertStatusType(post.statusType)} /> {/*de aflat cum facem sa afisam tagul ca string din enum*/}
                             </Item.Extra>
                         </Item.Content>
                     </Item>
