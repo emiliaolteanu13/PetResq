@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { Post } from "../../../app/layout/model/post";
-import {convertPetType, convertStatusType} from "../../../app/layout/convertIntegerToStringEnumValue";
 
 
 
