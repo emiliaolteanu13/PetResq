@@ -8,9 +8,9 @@ interface Props {
 
 export default function PostDetails ({ post }: Props) {
     return (
-        <Card>
+        <Card fluid>
             {/*<Image src={`/assets/${petPhoto.postId}.jpg`} ceva de genul, si sa adaugam interfata sus />*/}
-            <Image src="/assets/logo.png" />
+            <Image src="/assets/dalmatian.jpg" />
             <Card.Content>
                 <Card.Header>{post.title}</Card.Header>
                 <Card.Meta>
@@ -21,9 +21,9 @@ export default function PostDetails ({ post }: Props) {
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-            <Button.Group width='2'>
+            <Button.Group widths='2'>
                 <Button basic color='blue' content='Edit' />
-                <Button basic color='red' content='Delete' />
+                <Button basic color='grey' content='Cancel' />
             </Button.Group>
             </Card.Content>
         </Card>

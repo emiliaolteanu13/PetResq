@@ -8,6 +8,7 @@ import PostDashboard from '../../features/posts/dashboard/PostDashboard';
 
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [selectedPost, setSelectedActivity] = 
 
   useEffect(() => {
     axios.get<Post[]>('http://localhost:5000/api/posts').then(response => {
