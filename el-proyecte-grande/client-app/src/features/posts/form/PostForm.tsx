@@ -1,14 +1,15 @@
 import React, { ChangeEvent, useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
-import { Post } from "../../../app/layout/model/post";
+import { Post } from "../../../app/models/post";
 
 interface Props {
     post: Post | undefined;
     closeForm: () => void;
     createOrEdit: (post: Post) => void;
+    submitting: boolean;
 }
 
-export default function PostForm({post: selectedPost, closeForm, createOrEdit}: Props) {
+export default function PostForm({post: selectedPost, closeForm, createOrEdit, submitting}: Props) {
 
     const petType = [
         {key: 1, value: 1, text: "CAT"},
@@ -43,6 +44,11 @@ export default function PostForm({post: selectedPost, closeForm, createOrEdit}: 
         setPost({...post, [name]: value})
     }
 
+    /*function handleSelect(event : ChangeEvent<HTMLSelectElement>) {
+        const{name, value} = event.target;
+        setPost({...post, [name]:value})
+    }*/
+
     return (
         <Segment clearing>
             <Form onSubmit={handleSubmit} autoComplete='off'>
@@ -51,8 +57,8 @@ export default function PostForm({post: selectedPost, closeForm, createOrEdit}: 
                 <Form.Select placeholder = "Animal type" options={petType} />
                 <Form.Select placeholder = "Post type" options={statusType} />
                 <Form.Input placeholder = 'Location' value={post.location} name='location' onChange={handleInputChange}/>
-                <Form.Input placeholder = 'Date' value={post.date} name='date' onChange={handleInputChange}/>
-                <Button floated='right' positive type='submit' content='Submit'/>
+                <Form.Input type='date' placeholder = 'Date' value={post.date} name='date' onChange={handleInputChange}/>
+                <Button loading={submitting} floated='right' positive type='submit' content='Submit'/>
                 <Button onClick={closeForm} floated='right' type='button' content='Cancel'/>
             </Form>
         </Segment>

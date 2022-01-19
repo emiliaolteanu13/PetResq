@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Image } from "semantic-ui-react";
-import { Post } from "../../../app/layout/model/post";
+import { Post } from "../../../app/models/post";
 
 interface Props {
     post: Post;

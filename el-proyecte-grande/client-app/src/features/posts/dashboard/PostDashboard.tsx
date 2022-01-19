@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "semantic-ui-react";
-import { Post } from "../../../app/layout/model/post";
+import { Post } from "../../../app/models/post";
 import PostDetails from "../details/PostDetails";
 import PostForm from "../form/PostForm";
 import PostList from "./PostList";
@@ -15,10 +15,12 @@ interface Props {
     closeForm: () => void;
     createOrEdit: (post: Post) => void;
     deletePost: (id: string) => void;
+    submitting: boolean;
 }
 
 export default function PostDashboard({posts, selectedPost, 
-    selectPost, cancelSelectPost, editMode, openForm, closeForm, createOrEdit, deletePost}: Props) {
+    selectPost, cancelSelectPost, editMode, openForm, 
+    closeForm, createOrEdit, deletePost, submitting}: Props) {
     return (
         <Grid>
             <Grid.Column width="10">
@@ -33,9 +35,14 @@ export default function PostDashboard({posts, selectedPost,
                     post={selectedPost} 
                     cancelSelectPost={cancelSelectPost} 
                     openForm={openForm}
-                    />}
-                    {editMode &&
-                <PostForm closeForm={closeForm} post={selectedPost} createOrEdit={createOrEdit}/>}
+                />}
+                {editMode &&
+                <PostForm 
+                    closeForm={closeForm} 
+                    post={selectedPost} 
+                    createOrEdit={createOrEdit}
+                    submitting={submitting}
+                />}
             </Grid.Column>
         </Grid>
     )
