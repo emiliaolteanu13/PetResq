@@ -27,6 +27,7 @@ export default function PostDashboard({posts, selectedPost,
                 <PostList posts={posts} 
                     selectPost={selectPost}
                     deletePost={deletePost}
+                    submitting={submitting}
                     />
             </Grid.Column>
             <Grid.Column width="6">

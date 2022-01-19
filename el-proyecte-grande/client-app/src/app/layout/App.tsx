@@ -66,6 +66,11 @@ function App() {
   }
 
   function handleDeletePost(id: string) {
+    setSubmitting(true);
+    agent.Posts.delete(id).then(() => {
+      setPosts([...posts.filter(x => x.id !== id)]);
+      setSubmitting(false);
+    })
     setPosts([...posts.filter(x => x.id !== id)])
   }
 

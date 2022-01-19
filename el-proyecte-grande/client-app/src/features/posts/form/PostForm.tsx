@@ -42,21 +42,18 @@ export default function PostForm({post: selectedPost, closeForm, createOrEdit, s
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const{name, value} = event.target;
         setPost({...post, [name]: value})
-        console.log(post)
     }
 
     const handleDropDownSelectPet = (event: any, data: any) => {
         const name = 'petType';
         const value = petType[data.value-1].text;
         setPost({...post, [name]: value})
-        console.log(post)
        };
 
     const handleDropDownSelectStatus = (event: any, data: any) => {
         const name = 'statusType';
         const value = statusType[data.value-1].text;
         setPost({...post, [name]: value})
-        console.log(post);
         };
 
     return (
