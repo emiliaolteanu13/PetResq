@@ -28,7 +28,7 @@ export default function PostForm({post: selectedPost, closeForm, createOrEdit, s
         description: '',
         date: '',
         location: '',
-        userID: '',
+        userID: '84b1ffb1-f1a1-44c4-a8b7-016610c6a135',
         petType: '',
         statusType: ''
     }
@@ -42,20 +42,30 @@ export default function PostForm({post: selectedPost, closeForm, createOrEdit, s
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const{name, value} = event.target;
         setPost({...post, [name]: value})
+        console.log(post)
     }
 
-    /*function handleSelect(event : ChangeEvent<HTMLSelectElement>) {
-        const{name, value} = event.target;
-        setPost({...post, [name]:value})
-    }*/
+    const handleDropDownSelectPet = (event: any, data: any) => {
+        const name = 'petType';
+        const value = petType[data.value-1].text;
+        setPost({...post, [name]: value})
+        console.log(post)
+       };
+
+    const handleDropDownSelectStatus = (event: any, data: any) => {
+        const name = 'statusType';
+        const value = statusType[data.value-1].text;
+        setPost({...post, [name]: value})
+        console.log(post);
+        };
 
     return (
         <Segment clearing>
             <Form onSubmit={handleSubmit} autoComplete='off'>
                 <Form.Input placeholder = 'Title' value={post.title} name='title' onChange={handleInputChange}/>
                 <Form.TextArea placeholder = 'Description' value={post.description} name='description' onChange={handleInputChange}/>
-                <Form.Select placeholder = "Animal type" options={petType} />
-                <Form.Select placeholder = "Post type" options={statusType} />
+                <Form.Select placeholder = "Animal type" options={petType} onChange={handleDropDownSelectPet}/>
+                <Form.Select placeholder = "Post type" options={statusType} onChange={handleDropDownSelectStatus}/>
                 <Form.Input placeholder = 'Location' value={post.location} name='location' onChange={handleInputChange}/>
                 <Form.Input type='date' placeholder = 'Date' value={post.date} name='date' onChange={handleInputChange}/>
                 <Button loading={submitting} floated='right' positive type='submit' content='Submit'/>
