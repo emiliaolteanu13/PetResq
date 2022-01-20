@@ -2,7 +2,6 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Post } from "../models/post";
 import { v4 as uuid } from 'uuid';
-import axios from "axios";
 
 export default class PostStore {
     posts: Post[] = [];
@@ -88,7 +87,23 @@ export default class PostStore {
                 this.loading = false;
             })
         }
+    }
 
+    deletePost = async  (id: string) => {
+        this.loading = true;
+        try {
+            await agent.Posts.delete(id);
+            runInAction(() => {
+                this.posts = [...this.posts.filter(a => a.id !== id)];
+                if(this.selectedPost?.id === id) this.cancelSelectedPost();
+                this.loading = false;
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.loading = false;
+            })
+        }
     }
 
 }
