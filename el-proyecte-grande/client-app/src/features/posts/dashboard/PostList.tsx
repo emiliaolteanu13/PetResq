@@ -1,23 +1,26 @@
 import React, { SyntheticEvent, useState } from "react";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { Post } from "../../../app/models/post";
+import { useStore } from "../../../app/stores/store";
 
 
 
 interface Props {
     posts: Post[];
-    selectPost: (id: string) => void;
     deletePost: (id: string)=> void;
     submitting: boolean;
 }
 
-export default function PostList({posts, selectPost, deletePost, submitting}:Props) {
+export default function PostList({posts, deletePost, submitting}:Props) {
     const [target, setTarget] = useState('');
 
     function handlePostDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         setTarget(e.currentTarget.name);
         deletePost(id);
     }
+
+    const {postStore} = useStore();
+
     return (
         <Segment>
             <Item.Group divided>
@@ -31,7 +34,7 @@ export default function PostList({posts, selectPost, deletePost, submitting}:Pro
                                 <div>{post.location}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button onClick={()=> selectPost(post.id)} floated='right' content='View' color='blue'/>
+                                <Button onClick={()=> postStore.selectPost(post.id)} floated='right' content='View' color='blue'/>
                                 <Button 
                                     name={post.id}
                                     loading={submitting && target === post.id} 

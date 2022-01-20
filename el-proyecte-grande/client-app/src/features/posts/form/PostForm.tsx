@@ -1,15 +1,14 @@
+import { observer } from "mobx-react-lite";
 import React, { ChangeEvent, useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
 import { Post } from "../../../app/models/post";
+import { useStore } from "../../../app/stores/store";
 
-interface Props {
-    post: Post | undefined;
-    closeForm: () => void;
-    createOrEdit: (post: Post) => void;
-    submitting: boolean;
-}
 
-export default function PostForm({post: selectedPost, closeForm, createOrEdit, submitting}: Props) {
+export default observer(function PostForm() {
+
+    const {postStore} = useStore();
+    const { selectedPost, closeForm, createPost, updatePost, loading } = postStore;
 
     const petType = [
         {key: 1, value: 1, text: "CAT"},
@@ -36,7 +35,7 @@ export default function PostForm({post: selectedPost, closeForm, createOrEdit, s
     const[post, setPost] = useState(initialState);
 
     function handleSubmit() {
-        createOrEdit(post);
+        post.id ? updatePost(post) : createPost(post);
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -65,9 +64,9 @@ export default function PostForm({post: selectedPost, closeForm, createOrEdit, s
                 <Form.Select placeholder = {post.statusType?post.statusType:"Post type"} options={statusType} onChange={handleDropDownSelectStatus}/>
                 <Form.Input placeholder = 'Location' value={post.location} name='location' onChange={handleInputChange}/>
                 <Form.Input type='date' placeholder = 'Date' value={post.date} name='date' onChange={handleInputChange}/>
-                <Button loading={submitting} floated='right' positive type='submit' content='Submit'/>
+                <Button loading={loading} floated='right' positive type='submit' content='Submit'/>
                 <Button onClick={closeForm} floated='right' type='button' content='Cancel'/>
             </Form>
         </Segment>
     )
-}
+})
