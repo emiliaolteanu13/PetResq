@@ -11,7 +11,9 @@ appsettings.json
 *.user
 *.userosscache
 *.sln.docstates
-*.db
+*.db 
+## if db does not work, enter command git rm --cached file
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
