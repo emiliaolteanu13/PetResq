@@ -1,15 +1,22 @@
-import React from "react";
+import { observer } from "mobx-react-lite";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Button, Card, Image } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
 
 
-export default function PostDetails () {
+export default observer(function PostDetails () {
 
     const {postStore} = useStore();
-    const { selectedPost: post, openForm, cancelSelectedPost } = postStore;
+    const { selectedPost: post, loadPost, loadingInitial} = postStore;
+    const {id} = useParams<{id: string}>();
 
-    if(!post) return <LoadingComponent />;
+    useEffect(() => {
+        if (id) loadPost(id);
+    }, [id, loadPost]);
+
+    if(loadingInitial || !post) return <LoadingComponent />;
 
     return (
         <Card fluid>
@@ -26,10 +33,10 @@ export default function PostDetails () {
             </Card.Content>
             <Card.Content extra>
             <Button.Group widths='2'>
-                <Button onClick={() => openForm(post.id)}basic color='blue' content='Edit' />
-                <Button onClick={cancelSelectedPost} basic color='grey' content='Cancel' />
+                <Button as={Link} to={`/manage/${post.id}`} basic color='blue' content='Edit' />
+                <Button as={Link} to='/posts' basic color='grey' content='Cancel' />
             </Button.Group>
             </Card.Content>
         </Card>
     )
-}
+})

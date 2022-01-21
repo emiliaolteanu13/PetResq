@@ -1,13 +1,32 @@
 import { observer } from "mobx-react-lite";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { Button, Form, Segment } from "semantic-ui-react";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
+import { v4 as uuid } from 'uuid';
 
 
 export default observer(function PostForm() {
-
+    const history = useHistory();
     const {postStore} = useStore();
-    const { selectedPost, closeForm, createPost, updatePost, loading } = postStore;
+    const { createPost, updatePost, loading, loadPost, loadingInitial } = postStore;
+    const {id} = useParams<{id: string}>();
+
+    const[post, setPost] = useState({
+        id:'',
+        title: '',
+        description: '',
+        date: '',
+        location: '',
+        userID: '84b1ffb1-f1a1-44c4-a8b7-016610c6a135',
+        petType: '',
+        statusType: ''
+    });
+
+    useEffect(() => {
+        if(id) loadPost(id).then(post => setPost(post!))
+    }, [id, loadPost]);
 
     const petType = [
         {key: 1, value: 1, text: "CAT"},
@@ -19,22 +38,18 @@ export default observer(function PostForm() {
         {key: 1, value: 1, text: "LOST"},
         {key: 2, value: 2, text: "FOUND"},
         {key: 3, value: 3, text: "FOR ADOPTION"}];
-
-    const initialState = selectedPost ?? {
-        id:'',
-        title: '',
-        description: '',
-        date: '',
-        location: '',
-        userID: '84b1ffb1-f1a1-44c4-a8b7-016610c6a135',
-        petType: '',
-        statusType: ''
-    }
-
-    const[post, setPost] = useState(initialState);
+    
 
     function handleSubmit() {
-        post.id ? updatePost(post) : createPost(post);
+        if(post.id.length === 0) {
+            let newPost = {
+                ...post,
+                id: uuid()
+            };
+            createPost(newPost).then(() => history.push(`/posts/${newPost.id}`))
+        } else {
+            updatePost(post).then(() => history.push(`/posts/${post.id}`))
+        }
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -54,6 +69,8 @@ export default observer(function PostForm() {
         setPost({...post, [name]: value})
         };
 
+    if(loadingInitial) return <LoadingComponent content='Loading post...' />
+        
     return (
         <Segment clearing>
             <Form onSubmit={handleSubmit} autoComplete='off'>
@@ -64,7 +81,7 @@ export default observer(function PostForm() {
                 <Form.Input placeholder = 'Location' value={post.location} name='location' onChange={handleInputChange}/>
                 <Form.Input type='date' placeholder = 'Date' value={post.date} name='date' onChange={handleInputChange}/>
                 <Button loading={loading} floated='right' positive type='submit' content='Submit'/>
-                <Button onClick={closeForm} floated='right' type='button' content='Cancel'/>
+                <Button as={Link} to='/posts' floated='right' type='button' content='Cancel'/>
             </Form>
         </Segment>
     )

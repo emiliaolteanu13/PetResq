@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 
@@ -11,7 +12,7 @@ import { useStore } from "../../../app/stores/store";
 export default observer(function PostList() {
 
     const {postStore} = useStore();
-    const { deletePost, posts, loading } = postStore;
+    const { deletePost, postsByDate, loading } = postStore;
     const [target, setTarget] = useState('');
 
     function handlePostDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
@@ -24,7 +25,7 @@ export default observer(function PostList() {
     return (
         <Segment>
             <Item.Group divided>
-                {posts.map(post => (
+                {postsByDate.map(post => (
                     <Item key={post.id}>
                         <Item.Content>
                             <Item.Header as='a'>{post.title}</Item.Header>
@@ -34,7 +35,7 @@ export default observer(function PostList() {
                                 <div>{post.location}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button onClick={()=> postStore.selectPost(post.id)} floated='right' content='View' color='blue'/>
+                                <Button as={Link} to={`/posts/${post.id}`} floated='right' content='View' color='blue'/>
                                 <Button 
                                     name={post.id}
                                     loading={loading && target === post.id} 
