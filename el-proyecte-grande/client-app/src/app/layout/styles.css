@@ -1,9 +1,63 @@
+/* colors 
+#ffb380
+#ff751a
+
+*/
+
+
 body {
   background-color: #EAEAEA !important;
 }
 
-.ui.inverted.top.fixed.menu {
-  background-image: linear-gradient(135deg, rgb(24,42,115) 0%, rgb(33,138,174) 69%, rgb(32,167,172) 89%) !important;
 
+/* Navbar */
+
+.ui.ui.inverted.top.fixed.menu {
+  background-image: linear-gradient(90deg, #ff751a 30%, #ffb380 90%, #ffb380 90%);
+  height: 100px;
 }
 
+/* Navbar Logo */
+
+.ui.inverted.menu .item {
+  font-size: large;
+  color: #FFF !important;
+}
+.ui.inverted.menu .item:hover {
+  font-size: large;
+  color: #751AFF !important;
+}
+
+
+/* Navbar Links */
+.ui.inverted.menu a.item {
+  float: left;
+  font-size: large;
+  font-weight: bold;
+  color: #FFF !important;
+}
+.ui.inverted.menu a.item:hover {
+  font-size: large;
+  color: #751AFF !important;
+}
+
+.ui.inverted.menu a.item.active {
+  font-size: large;
+  font-weight: bold;
+  color: #ffffff !important;
+}
+.ui.inverted.menu a.item.active:hover {
+  font-size: large;
+  color: #751AFF !important;
+}
+
+img#Logo:hover {
+  
+  background-image: url('C:\Users\Alin\Documents\Codecool\Advanced\el-proyecte-grande-sprint-1-csharp-NastyTester\el-proyecte-grande\client-app\public\assets\logoHover.png');
+}
+
+
+
+.ui.grid {
+  margin-top: 2rem !important;
+}
