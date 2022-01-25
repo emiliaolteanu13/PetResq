@@ -7,6 +7,7 @@ import { Route, useLocation } from 'react-router-dom';
 import HomePage from '../../features/home/HomePage';
 import PostForm from '../../features/posts/form/PostForm';
 import PostDetails from '../../features/posts/details/PostDetails';
+import Footer from './Footer';
 
 
 function App() {
@@ -21,11 +22,12 @@ function App() {
         render = {() => (
           <>
             <NavBar />
-            <Container style={{marginTop: '7em'}}>
+            <Container style={{marginTop: '10em'}}>
               <Route exact path='/posts' component={PostDashboard} />
               <Route path='/posts/:id' component={PostDetails} />
               <Route key={location.key} path={['/createPost', '/manage/:id']} component={PostForm} />
             </Container>
+            <Footer></Footer>
           </>
         )}
       />
