@@ -38,8 +38,7 @@ body {
   color: #751AFF !important;
 }
 img#Logo:hover {
-  
-  background-image: url('C:\Users\zucke\Documents\Advanced\el-proyecte-grande-sprint-1-csharp-NastyTester\el-proyecte-grande\client-app\public\assets\logoHover.png');
+  background-image: url('../../../public/assets/logoHover.png');
 }
 
 

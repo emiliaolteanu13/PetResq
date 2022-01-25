@@ -10,7 +10,7 @@ export default function Footer() {
 
     return (
             <footer className='footer'>
-                <div className='credits'> Developed by RunTimeTerror</div>
+                <div className='credits'> Developed by RunTimeTerror. All rights reserved</div>
                 
             </footer>
     )
