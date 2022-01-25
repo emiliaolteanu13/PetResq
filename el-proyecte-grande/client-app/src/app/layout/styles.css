@@ -23,13 +23,16 @@ body {
 
 .ui.ui.inverted.top.fixed.menu {
   background-image: linear-gradient(90deg, #ff751a 30%, #ffb380 90%, #ffb380 90%);
-  height: 100px;
-  margin-bottom: 3em;
+  height:min-content;
+  width: 100%;
 }
+
+
 
 /* Navbar Logo */
 
 .ui.inverted.menu .item {
+  height: 80px;
   font-size: large;
   color: #FFF !important;
 }
