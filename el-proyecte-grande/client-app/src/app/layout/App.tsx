@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from 'semantic-ui-react';
 import NavBar from './NavBar';
 import PostDashboard from '../../features/posts/dashboard/PostDashboard';
@@ -13,6 +13,10 @@ import Footer from './Footer';
 function App() {
 
   const location = useLocation();
+
+  useEffect(() => {
+    document.title = "PetResQ"
+  }, [])
 
   return (
     <>

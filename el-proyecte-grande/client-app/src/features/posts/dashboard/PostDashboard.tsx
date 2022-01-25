@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Grid } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
+import PostFilters from "./PostFilters";
 import PostList from "./PostList";
 
 
@@ -24,7 +25,7 @@ export default observer (function PostDashboard() {
                 <PostList />
             </Grid.Column>
             <Grid.Column width="6">
-                <h2>Post filters</h2>
+                <PostFilters />
             </Grid.Column>
         </Grid>
     )
