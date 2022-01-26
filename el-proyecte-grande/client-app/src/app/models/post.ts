@@ -6,5 +6,5 @@ export interface Post {
     description: string;
     petType: string;
     statusType: string;
-    date: string;
+    date: Date | null;
 }

@@ -8,7 +8,7 @@ export default class PostStore {
     selectedPost: Post | undefined = undefined;
     editMode = false;
     loading = false;
-    loadingInitial = true;
+    loadingInitial = false;
     
     constructor() {
         makeAutoObservable(this)
@@ -16,7 +16,7 @@ export default class PostStore {
 
     get postsByDate() {
         return Array.from(this.postRegistry.values()).sort((a, b) => 
-            Date.parse(a.date) - Date.parse(b.date));
+            a.date!.getTime() - b.date!.getTime());
     }
 
     loadPosts = async () => {
@@ -57,7 +57,7 @@ export default class PostStore {
     } 
 
     private setPost = (post: Post) => {
-        post.date = post.date.split('T')[0]; // split date and take first part
+        post.date = new Date(post.date!); // split date and take first part
         this.postRegistry.set(post.id, post);
     }
 
