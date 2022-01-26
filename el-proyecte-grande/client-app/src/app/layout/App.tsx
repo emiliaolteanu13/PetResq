@@ -8,6 +8,8 @@ import HomePage from '../../features/home/HomePage';
 import PostForm from '../../features/posts/form/PostForm';
 import PostDetails from '../../features/posts/details/PostDetails';
 import Footer from './Footer';
+//@ts-ignore
+import { Helmet } from "react-helmet";
 
 
 function App() {
@@ -35,8 +37,14 @@ function App() {
           </>
         )}
       />
+      <Helmet>
+            <script>
+            {'let rellax = new Rellax(\'.rellax\',{{horizontal: true, vertical: false, speed: 1.5}});'}
+            </script>
+      </Helmet>
     </>
   );
 }
+
 
 export default observer (App);
