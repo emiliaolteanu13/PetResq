@@ -9,9 +9,10 @@
 
 * {
   font-family: "Quicksand";
+  
 }
 
-
+* {cursor: url(http://www.zingerbugimages.com/cursors/catscratch_with_pointer.ani), url(http://www.zingerbug.com/cursors/cursors/catscratch_with_pointer.gif), progress !important;}
 
 body {
   background-color: #EAEAEA !important;
