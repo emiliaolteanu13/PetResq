@@ -5,6 +5,8 @@ using Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -45,7 +47,7 @@ namespace API.Controllers
             return Unauthorized();
         }
         [HttpPost("register")]
-        public async Task<IActionResult<UserDto>> Reister(RegisterDto registerDto)
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if(await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
             {
