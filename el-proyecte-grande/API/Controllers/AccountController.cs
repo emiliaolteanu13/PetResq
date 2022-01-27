@@ -4,9 +4,11 @@ using API.Services;
 using Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http;
 
 namespace API.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
@@ -41,6 +43,14 @@ namespace API.Controllers
                 };
             }
             return Unauthorized();
+        }
+        [HttpPost("register")]
+        public async Task<IActionResult<UserDto>> Reister(RegisterDto registerDto)
+        {
+            if(await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
+            {
+                return BadRequest("Email taken");
+            }
         }
     }
 }
