@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Icon, Item, Label, Segment } from 'semantic-ui-react';
 import { Post } from '../../../app/models/post';
 import { useStore } from '../../../app/stores/store';
+import {format} from 'date-fns';
 
 interface Props{
     post: Post
@@ -39,7 +40,7 @@ export default function PostListItem({post}: Props) {
             </Segment>
             <Segment>
                 <span>
-                    <Icon name='clock' />{post.date}
+                    <Icon name='clock' />{format(post.date!, 'dd MMM yyyy')}
                     <Icon name='marker'/>{post.location}
                     
                 </span>

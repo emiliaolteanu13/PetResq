@@ -5,6 +5,7 @@ import { Button, Header, Item, Segment, Image, Label } from 'semantic-ui-react'
 import { Post } from "../../../app/models/post";
 // import { format } from 'date-fns';
 import { useStore } from '../../../app/stores/store';
+import {format} from 'date-fns';
 
 
 
@@ -40,20 +41,18 @@ export default observer(function PostDetailedHeader({ post }: Props) {
                                     content={post.title}
                                     style={{ color: 'black' }}
                                 />
-                                <p>{post.date}</p>
+                                <p>{format(post.date!, 'dd MMM yyyy')}</p>
                                <p>
                                    Posted by Bob
                                </p>
                             </Item.Content>
                         </Item>
                     </Item.Group>
-                <Button
-                    color='teal'
-                >
+                <Button color='teal'>
                     Join
                 </Button>
-                <Button color='orange' floated='right'> 
-                    Manege
+                <Button as={Link} to={`/edit/${post.id}`} color='orange' floated='right'> 
+                    Edit Post
                 </Button>
                 <Button > Cancel</Button>
             </Segment>

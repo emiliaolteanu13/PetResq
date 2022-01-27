@@ -31,7 +31,7 @@ function App() {
             <Container style={{marginTop: '10em'}}>
               <Route exact path='/posts' component={PostDashboard} />
               <Route path='/posts/:id' component={PostDetails} />
-              <Route key={location.key} path={['/createPost', '/manage/:id']} component={PostForm} />
+              <Route key={location.key} path={['/createPost', '/edit/:id']} component={PostForm} />
             </Container>
             <Footer></Footer>
           </>
