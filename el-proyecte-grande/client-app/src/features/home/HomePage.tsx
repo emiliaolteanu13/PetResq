@@ -4,25 +4,30 @@ import { Container } from "semantic-ui-react";
 import './homepage.css';
 import simpleParallax from 'simple-parallax-js';
 import background from './background.png'
+import cat1 from './cat1.png'
 
 
 export default function HomePage() {
     
-    // const[rellax, setRellax] = useState();
     useEffect(() => {
-        var image = document.getElementsByClassName('thumbnail');
+        var image = document.getElementsByClassName('cat1');
         new simpleParallax(image, {
             orientation: 'right',
-            transition: 'true',
+            overflow:true,
+            scale:1.5,
+            maxTransition:50
         });
     })
     
     return (
         <>
-                    <div className="home">
-
-                    </div>
-
+            <div className="homepage">
+                <div className="home">
+                    <Link to={'/posts'}> Posts </Link>
+                    <img className="cat1" src={cat1} style={{height:'10em', width:'auto',position:'absolute', bottom:'0em'}}/>
+                </div>
+            </div>
+            
         </>
 
             
