@@ -19,6 +19,7 @@ using MediatR;
 using Application.Posts;
 using Application.Core;
 using API.Controllers.Extensions;
+using FluentValidation.AspNetCore;
 
 namespace API
 {
@@ -38,10 +39,9 @@ namespace API
             services.AddControllers(opt => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
+            }).AddFluentValidation(config => {
+                config.RegisterValidatorsFromAssemblyContaining<Create>();
             });
-            // .AddFluentValidation(config => {
-            //     config.RegisterValidatorsFromAssemblyContaining<Create>();
-            // });
             services.AddApplicationServices(_config);
             services.AddIdentityServices(_config);
         }
