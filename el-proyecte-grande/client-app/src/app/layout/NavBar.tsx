@@ -15,6 +15,7 @@ export default function NavBar() {
                     <img src="/assets/logo.png"  alt="logo" id='Logo' style={{marginRight: '15px', height: '10em', width: 'auto'}} />
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/posts' name='Posts' />
+                <Menu.Item as={NavLink} to='/errors' name='Errors' />
                 <Menu.Item as={NavLink} to='/createPost' positive content='Create Post' />
             </Container>
         </Menu>
