@@ -27,7 +27,7 @@ namespace Application.Posts
             {
                 var post = await _context.Posts.FindAsync(request.Id);
 
-                if(post == null) return null;
+                //if(post == null) return null;
 
                 _context.Remove(post);
 
