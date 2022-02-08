@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Posts;
 using Domain;
@@ -8,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    ///after we build rutes for new controllers we need to restart the api solution using dotnet watch run
+    [AllowAnonymous]
     public class PostsController : BaseAPIController
     {
 

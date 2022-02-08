@@ -18,6 +18,9 @@ export default function HomePage() {
                     <img src={Field} className="foreground" />
                     <h1 className="title">Welcome</h1>
                 </header>
+                <Button as={Link} to='/login' size="huge" inverted>
+                    Login!
+                </Button>
                 <div className="option1">
                     Are you here to adopt a pet?
                     <Link to='/posts' > Adopt</Link>
