@@ -4,6 +4,7 @@ import { Post } from "../models/post";
 import { toast } from "react-toastify";
 import { store } from "../stores/store";
 import { User, UserFormValues } from "../models/user";
+import { history } from "../..";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -24,8 +25,8 @@ axios.interceptors.response.use(async response => {
                     toast.error(data);
                 }
                 if(config.method === 'get' && data.errors.hasOwnProperty('id')){
-                    //history.push('/not-found')
-                    toast.error('not-found');
+                    history.push('/not-found');
+                
                 }
                 if(data.errors){
                     const modalStateError =[];
