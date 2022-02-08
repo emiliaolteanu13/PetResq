@@ -13,6 +13,7 @@ import { Helmet } from "react-helmet";
 import TestErrors from '../../features/errors/TestError';
 import { ToastContainer } from 'react-toastify';
 import NotFound from '../../features/errors/NotFound';
+import ServerError from '../../features/errors/ServerError';
 
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
                 <Route path='/posts/:id' component={PostDetails} />
                 <Route key={location.key} path={['/createPost', '/edit/:id']} component={PostForm} />
                 <Route path='/errors' component={TestErrors} />
+                <Route path='/server-error' component={ServerError} />
+
                 <Route component={NotFound} />
               </Switch>  
             </Container>

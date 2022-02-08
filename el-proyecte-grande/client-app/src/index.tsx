@@ -7,18 +7,18 @@ import './app/layout/styles.css';
 import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
 import { store, StoreContext } from './app/stores/store';
-import { Router } from 'react-router-dom';
-import {createBrowserHistory} from 'history';
+import { BrowserRouter } from 'react-router-dom';
+//import {createBrowserHistory} from 'history';
 
 // import 'semantic-ui-css/semantic.min.css';
 
-export const history = createBrowserHistory();
+//export const history = createBrowserHistory();
 
 ReactDOM.render(
   <StoreContext.Provider value={store}>
-    <Router history={history}>
+    <BrowserRouter>
       <App />
-    </Router>
+    </BrowserRouter>
   </StoreContext.Provider>,
   document.getElementById('root')
 );
