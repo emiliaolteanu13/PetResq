@@ -3,6 +3,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { Post } from "../models/post";
 import { toast } from "react-toastify";
 import { store } from "../stores/store";
+import { User, UserFormValues } from "../models/user";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -68,8 +69,15 @@ const Posts = {
     delete: (id: string) => axios.delete<void>(`/posts/${id}`)
 }
 
+const Account = {
+    current: () => requests.get<User>('/account'),
+    login: (user: UserFormValues) => requests.post<User>('/account/login', user),
+    register: (user: UserFormValues) => requests.post<User>('/account/register', user)
+}
+
 const agent = {
-    Posts
+    Posts,
+    Account
 }
 
 export default agent;
