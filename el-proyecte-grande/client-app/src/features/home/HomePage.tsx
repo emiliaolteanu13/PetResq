@@ -1,27 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Button } from "semantic-ui-react";
+import { Container, Button, Segment, Grid } from "semantic-ui-react";
 import './homepage.css';
 import Sky from './Sky.png';
 import Field from './Field.png';
+import { useStore } from "../../app/stores/store";
+import { observer } from "mobx-react-lite";
+import { ClientRequest } from "http";
 
 
-export default function HomePage() {
-    
+export default observer (function HomePage() {
+    const {userStore} = useStore();
 
     
     return (
         <>
             <div className="wrapper">
                 <header>
+
+            <Grid>
+                <Grid.Column textAlign="center">
+                    <div className="ui vertical buttons" >
+                        <Button className="ui button" as={Link} to='/login' size="huge" color='blue' inverted>Login</Button>
+                        <Button className="ui button" as={Link} to='/register' size="huge" color='blue' inverted>Register</Button>
+                        <Button className="ui button" as={Link} to='/posts' size="huge" color='blue' inverted>Anonymous</Button>
+                    </div> 
+                </Grid.Column>
+            </Grid>   
+                
+
+                
+                    
+                    {/* <Segment>
+                        <Button.Group widths='7'>
+                            <Button as={Link} to='/login' size="huge" color='blue' inverted>
+                                Login!
+                            </Button>
+                            <Button as={Link} to='/register' size="huge" color='blue' inverted>
+                                Register!
+                            </Button>
+                            <Button as={Link} to='/posts' size="huge" color='blue' inverted>
+                                Anonymous
+                            </Button>
+                        </Button.Group>
+                    </Segment> */}
                     <img src={Sky} className="background" />
-                    <img src={Field} className="foreground" />
                     <h1 className="title">Welcome</h1>
                 </header>
-                <Button as={Link} to='/login' size="huge" inverted>
-                    Login!
-                </Button>
-                <div className="option1">
+                
+                
+                {/* <div className="option1">
                     Are you here to adopt a pet?
                     <Link to='/posts' > Adopt</Link>
                 </div>
@@ -32,13 +60,13 @@ export default function HomePage() {
                 <div className="option3">
                     Did you find a lost pet?
                     <Link to='/posts' > Adopt</Link>
-                </div>
+                </div> */}
             </div>
             
         </>
 
             
     )
-}
+})
 
 
