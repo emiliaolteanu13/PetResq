@@ -86,7 +86,7 @@ export default observer(function PostForm() {
     //     setPost({...post, [name]: value})
     //     };
 
-    if(loadingInitial) return <LoadingComponent content='Loading post...' />
+    if(loadingInitial) return <LoadingComponent />
         
     return (
         <Segment clearing>
