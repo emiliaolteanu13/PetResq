@@ -17,6 +17,8 @@
 body {
   background-color: #EAEAEA !important;
   
+
+  
 }
 
 
@@ -116,6 +118,12 @@ footer {
   width: 100%;
 }
 
+.masthead {
+  display: flex;
+  align-items: center;
+  background-image: url('../../../public/assets/cat-opens-eyes.gif') !important;
+  height: 100vh;
+}
 .masthead .ui.menu .ui.button,
 .ui.menu a.ui.inverted.button {
   margin-left: 0.5em;

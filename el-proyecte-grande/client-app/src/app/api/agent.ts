@@ -1,6 +1,10 @@
 import React from "react";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { Post } from "../models/post";
+import { toast } from "react-toastify";
+import { store } from "../stores/store";
+import { User, UserFormValues } from "../models/user";
+import { history } from "../..";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -10,14 +14,46 @@ const sleep = (delay: number) => {
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
+axios.interceptors.request.use(config => {
+    const token = store.commonStore.token;
+    if (token) config.headers!.Authorization = `Bearer ${token}`
+    return config;
+})
+
 axios.interceptors.response.use(async response => {
-    try {
-        await sleep(1000);
+        await sleep(3000);
         return response;
-    } catch (error) {
-        console.log(error);
-        return await Promise.reject(error);
-    }
+    }, (error: AxiosError) => {
+        const {data, status, config} = error.response!;
+        switch (status) {
+            case 400:
+                if(config.method === 'get' && data.errors.hasOwnProperty('id')){
+                    history.push('/not-found');
+                
+                }
+                if(data.errors){
+                    const modalStateError =[];
+                    for (const key in data.errors){
+                        if(data.errors[key]){
+                            modalStateError.push(data.error[key])
+                        }
+                    }
+                    throw modalStateError.flat()
+                }
+                
+                break;
+            case 401:
+                toast.error('unauthorized');
+                break;
+            case 404:
+                toast.error('not found');
+                break;
+            case 500:
+                store.commonStore.setServerError(data);
+                //hostory.push('/server-error)
+                break;
+        }
+        return Promise.reject(error);
 })
 
 const responseBody = <T> (response: AxiosResponse<T>) => response.data;
@@ -37,8 +73,15 @@ const Posts = {
     delete: (id: string) => axios.delete<void>(`/posts/${id}`)
 }
 
+const Account = {
+    current: () => requests.get<User>('/account'),
+    login: (user: UserFormValues) => requests.post<User>('/account/login', user),
+    register: (user: UserFormValues) => requests.post<User>('/account/register', user)
+}
+
 const agent = {
-    Posts
+    Posts,
+    Account
 }
 
 export default agent;
