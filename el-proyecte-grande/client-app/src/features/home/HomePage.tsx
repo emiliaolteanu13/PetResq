@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Button, Segment, Grid } from "semantic-ui-react";
+import { Container, Button, Segment, Grid, Header } from "semantic-ui-react";
 import './homepage.css';
 import Sky from './Sky.png';
 import Field from './Field.png';
@@ -14,10 +14,14 @@ export default observer (function HomePage() {
 
     
     return (
-        <>
-            <div className="wrapper">
-                <header>
 
+        <>
+        {userStore.isLoggedIn ? (
+            <>
+                <Header as='h2' inverted content="welcome"></Header>
+                <Button className="ui button" as={Link} to='/posts' size="huge" color='blue' inverted>Go to posts</Button>
+            </>
+        ) : (
             <Grid>
                 <Grid.Column textAlign="center">
                     <div className="ui vertical buttons" >
@@ -26,7 +30,12 @@ export default observer (function HomePage() {
                         <Button className="ui button" as={Link} to='/posts' size="huge" color='blue' inverted>Anonymous</Button>
                     </div> 
                 </Grid.Column>
-            </Grid>   
+            </Grid> 
+        )}
+            {/* <div className="wrapper">
+                <header> */}
+
+              
                 
 
                 
@@ -44,9 +53,9 @@ export default observer (function HomePage() {
                             </Button>
                         </Button.Group>
                     </Segment> */}
-                    <img src={Sky} className="background" />
+                    {/* <img src={Sky} className="background" />
                     <h1 className="title">Welcome</h1>
-                </header>
+                </header> */}
                 
                 
                 {/* <div className="option1">
@@ -61,9 +70,9 @@ export default observer (function HomePage() {
                     Did you find a lost pet?
                     <Link to='/posts' > Adopt</Link>
                 </div> */}
-            </div>
+            {/* </div> */}
             
-        </>
+        </> 
 
             
     )
