@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Button, Segment, Grid, Header, Image } from "semantic-ui-react";
+import { Container, Button, Segment, Grid, Header, Image, ButtonGroup } from "semantic-ui-react";
 import './homepage.css';
 import Sky from './Sky.png';
 import Field from './Field.png';
@@ -29,11 +29,11 @@ export default observer (function HomePage() {
                 ) : (
                     <Grid>
                         <Grid.Column textAlign="center">
-                            <div className="ui horizontal buttons" >
+                            <ButtonGroup widths='7' className="ui horizontal buttons" >
                                 <Button className="ui button" as={Link} to='/login' size="huge" inverted>Login</Button>
                                 <Button className="ui button" as={Link} to='/register' size="huge" inverted>Register</Button>
                                 <Button className="ui button" as={Link} to='/posts' size="huge" inverted>Anonymous</Button>
-                            </div>
+                            </ButtonGroup>
                         </Grid.Column>
                     </Grid>
                 )}
