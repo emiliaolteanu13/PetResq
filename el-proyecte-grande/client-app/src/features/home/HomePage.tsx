@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Button, Segment, Grid, Header, Image } from "semantic-ui-react";
+import { Container, Button, Segment, Grid, Header, Image, ButtonGroup } from "semantic-ui-react";
 import './homepage.css';
 import Sky from './Sky.png';
 import Field from './Field.png';
@@ -24,18 +24,18 @@ export default observer (function HomePage() {
                 {userStore.isLoggedIn ? (
                     <>
                         <Header as='h2' content="Welcome"/>
-                        <Button className="ui button" as={Link} to='/posts' size="huge" color='blue' inverted>Go to posts</Button>
+                        <Button className="ui button" as={Link} to='/posts' size="huge"inverted>Go to posts</Button>
                     </>
                 ) : (
                     <Grid>
                         <Grid.Column textAlign="center">
-                            <div className="ui vertical buttons" >
-                                <Button className="ui button" as={Link} to='/login' size="huge" color='blue' inverted>Login</Button>
-                                <Button className="ui button" as={Link} to='/register' size="huge" color='blue' inverted>Register</Button>
-                                <Button className="ui button" as={Link} to='/posts' size="huge" color='blue' inverted>Anonymous</Button>
-                            </div> 
+                            <ButtonGroup widths='7' className="ui horizontal buttons" >
+                                <Button className="ui button" as={Link} to='/login' size="huge" inverted>Login</Button>
+                                <Button className="ui button" as={Link} to='/register' size="huge" inverted>Register</Button>
+                                <Button className="ui button" as={Link} to='/posts' size="huge" inverted>Anonymous</Button>
+                            </ButtonGroup>
                         </Grid.Column>
-                    </Grid> 
+                    </Grid>
                 )}
             </Container>
         </Segment>
