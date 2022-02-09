@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Button, Segment, Grid, Header } from "semantic-ui-react";
+import { Container, Button, Segment, Grid, Header, Image } from "semantic-ui-react";
 import './homepage.css';
 import Sky from './Sky.png';
 import Field from './Field.png';
 import { useStore } from "../../app/stores/store";
 import { observer } from "mobx-react-lite";
-import { ClientRequest } from "http";
 
 
 export default observer (function HomePage() {
@@ -16,22 +15,32 @@ export default observer (function HomePage() {
     return (
 
         <>
-        {userStore.isLoggedIn ? (
-            <>
-                <Header as='h2' inverted content="welcome"></Header>
-                <Button className="ui button" as={Link} to='/posts' size="huge" color='blue' inverted>Go to posts</Button>
-            </>
-        ) : (
-            <Grid>
-                <Grid.Column textAlign="center">
-                    <div className="ui vertical buttons" >
-                        <Button className="ui button" as={Link} to='/login' size="huge" color='blue' inverted>Login</Button>
-                        <Button className="ui button" as={Link} to='/register' size="huge" color='blue' inverted>Register</Button>
-                        <Button className="ui button" as={Link} to='/posts' size="huge" color='blue' inverted>Anonymous</Button>
-                    </div> 
-                </Grid.Column>
-            </Grid> 
-        )}
+        <Segment textAlign='center' vertical className='masthead'>
+            <Container text>
+                <Header inverted as='h1' >
+                    <Image width='150' height='150' src="/assets/logo.png" alt='logo' style={{ marginBottom: 12 }}/>
+                    Pet Resq
+                </Header>
+                {userStore.isLoggedIn ? (
+                    <>
+                        <Header as='h2' content="Welcome"/>
+                        <Button className="ui button" as={Link} to='/posts' size="huge" color='blue' inverted>Go to posts</Button>
+                    </>
+                ) : (
+                    <Grid>
+                        <Grid.Column textAlign="center">
+                            <div className="ui vertical buttons" >
+                                <Button className="ui button" as={Link} to='/login' size="huge" color='blue' inverted>Login</Button>
+                                <Button className="ui button" as={Link} to='/register' size="huge" color='blue' inverted>Register</Button>
+                                <Button className="ui button" as={Link} to='/posts' size="huge" color='blue' inverted>Anonymous</Button>
+                            </div> 
+                        </Grid.Column>
+                    </Grid> 
+                )}
+            </Container>
+        </Segment>
+        
+        
             {/* <div className="wrapper">
                 <header> */}
 
