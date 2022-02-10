@@ -21,39 +21,42 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(async response => {
-        await sleep(3000);
-        return response;
-    }, (error: AxiosError) => {
-        const {data, status, config} = error.response!;
-        switch (status) {
-            case 400:
-                if(config.method === 'get' && data.errors.hasOwnProperty('id')){
-                    history.push('/not-found');
-                
-                }
-                if(data.errors){
-                    const modalStateError =[];
-                    for (const key in data.errors){
-                        if(data.errors[key]){
-                            modalStateError.push(data.error[key])
-                        }
+    await sleep(3000);
+    return response;
+}, (error: AxiosError) => {
+    const { data, status, config} = error.response!;
+    switch (status) {
+        case 400:
+            if (config.method === 'get' && data.errors.hasOwnProperty('id')) {
+                history.push('/not-found');
+            }
+            if (data.errors) {
+                const modalStateErrors = [];
+                for (const key in data.errors) {
+                    if (data.errors[key]) {
+                        modalStateErrors.push(data.errors[key])
                     }
-                    throw modalStateError.flat()
                 }
-                
-                break;
-            case 401:
-                toast.error('unauthorized');
-                break;
-            case 404:
-                toast.error('not found');
-                break;
-            case 500:
-                store.commonStore.setServerError(data);
-                //hostory.push('/server-error)
-                break;
-        }
-        return Promise.reject(error);
+                throw modalStateErrors.flat();
+            } else {
+                toast.error(data);
+            }
+            break;
+        case 401:
+            if (status === 401 ) {
+                store.userStore.logout();
+                toast.error('Session expired - please login again');
+            }
+            break;
+        case 404:
+            history.push('/not-found');
+            break;
+        case 500:
+            store.commonStore.setServerError(data);
+            history.push('/server-error');
+            break;
+    }
+    return Promise.reject(error);
 })
 
 const responseBody = <T> (response: AxiosResponse<T>) => response.data;
