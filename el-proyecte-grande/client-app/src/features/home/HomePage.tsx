@@ -32,8 +32,8 @@ export default observer (function HomePage() {
                     <Grid>
                         <Grid.Column textAlign="center">
                             <ButtonGroup widths='7' className="ui horizontal buttons" >
-                                <Button className="ui button" onClick={() => modalStore.openModal(<LoginForm/>)} size="huge" inverted>Login</Button>
-                                <Button className="ui button" onClick={() => modalStore.openModal(<RegisterForm/>)} size="huge" inverted>Register</Button>
+                                <Button className="ui button" onClick={() => modalStore.openModal(<LoginForm />)} size="huge" inverted>Login</Button>
+                                <Button className="ui button" onClick={() => modalStore.openModal(<RegisterForm />)} size="huge" inverted>Register</Button>
                                 <Button className="ui button" as={Link} to='/posts' size="huge" inverted>Anonymous</Button>
                             </ButtonGroup>
                         </Grid.Column>

@@ -46,11 +46,11 @@ axios.interceptors.response.use(async response => {
                 toast.error('unauthorized');
                 break;
             case 404:
-                toast.error('not found');
+                history.push('/not-found');
                 break;
             case 500:
                 store.commonStore.setServerError(data);
-                //hostory.push('/server-error)
+                history.push('/server-error');
                 break;
         }
         return Promise.reject(error);
