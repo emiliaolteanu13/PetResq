@@ -4,6 +4,7 @@ import { Post } from "../models/post";
 
 
 export default class PostStore {
+
     postRegistry = new Map<string, Post>();
     selectedPost: Post | undefined = undefined;
     editMode = false;
@@ -64,6 +65,7 @@ export default class PostStore {
     private getPost = (id: string) => {
         return this.postRegistry.get(id);
     }
+
 
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state;
