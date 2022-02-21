@@ -14,7 +14,10 @@ export default observer (function NavBar() {
         <Menu inverted fixed="top">
             <Container>
                 <Menu.Item as={NavLink} to='/' exact header>
-                    <img src="/assets/logo.png"  alt="logo" id='Logo' style={{marginRight: '15px', height: '10em', width: 'auto'}} />
+                    <div className='logo'>
+                        <img src="/assets/logo.png"  alt="logo" style={{marginRight: '15px', height: '10em', width: 'auto'}} />
+                        <img src='/assets/logoHover.png' id='img-top' style={{marginRight: '15px', height: '10em', width: 'auto'}} />
+                    </div>
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/posts' name='Posts' />
                 {

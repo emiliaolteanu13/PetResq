@@ -43,8 +43,24 @@ body {
   font-size: large;
   color: #751AFF !important;
 }
-img#Logo:hover {
+/* img#Logo:hover {
   background-image: url('../../../public/assets/logoHover.png');
+} */
+
+
+.logo {
+  position: relative;
+  display: inline-block;
+}
+.logo #img-top {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+.logo:hover #img-top {
+  display: inline;
 }
 
 
