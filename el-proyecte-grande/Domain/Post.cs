@@ -9,7 +9,7 @@ namespace Domain
         public Guid ID { get; set; }
         public string Location { get; set; }
         public Guid UserID { get; set; }
- 
+        public string Username { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string PetType { get; set; }

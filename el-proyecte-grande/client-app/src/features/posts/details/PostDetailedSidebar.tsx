@@ -2,8 +2,13 @@ import React from 'react'
 import { Segment, List, Label, Item, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
+import { Post } from '../../../app/models/post'
 
-export default observer(function ActivityDetailedSidebar () {
+interface Props {
+    post: Post
+}
+
+export default observer(function ActivityDetailedSidebar ({ post }: Props) {
     return (
         <>
             <Segment
@@ -29,7 +34,7 @@ export default observer(function ActivityDetailedSidebar () {
                         <Image size='tiny' src={'/assets/user.png'} />
                         <Item.Content verticalAlign='middle'>
                             <Item.Header as='h3'>
-                                <Link to={`#`}>Bob</Link>
+                                <Link to={`#`}>{post.username}</Link>
                             </Item.Header>
                         </Item.Content>
                         {/*de adaugat si alte campuri */}

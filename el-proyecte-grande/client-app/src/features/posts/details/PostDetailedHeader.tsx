@@ -23,7 +23,8 @@ interface Props {
 }
 
 export default observer(function PostDetailedHeader({ post }: Props) {
-    
+    const { userStore } = useStore();
+    const { user } = userStore;
     return (
         <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
@@ -43,18 +44,18 @@ export default observer(function PostDetailedHeader({ post }: Props) {
                                 />
                                 <p>{format(post.date!, 'dd MMM yyyy')}</p>
                                <p>
-                                   Posted by Bob
+                                   Posted by {post.username}
                                </p>
                             </Item.Content>
                         </Item>
                     </Item.Group>
-                <Button color='teal'>
-                    Join
-                </Button>
+                    {user?.username==post.username &&
                 <Button as={Link} to={`/edit/${post.id}`} color='orange' floated='right'> 
                     Edit Post
-                </Button>
-                <Button > Cancel</Button>
+                </Button>}
+                {user?.username==post.username &&
+                <Button color='red' > Delete</Button>
+}
             </Segment>
         </Segment.Group>
     )

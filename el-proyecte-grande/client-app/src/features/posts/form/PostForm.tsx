@@ -33,7 +33,7 @@ export default observer(function PostForm() {
     };
     const token = parseJwt(commonStore.token);
     const userId = token.nameid;
-
+    const username = token.unique_name;
     
 
     const[post, setPost] = useState<Post>({
@@ -43,6 +43,7 @@ export default observer(function PostForm() {
         date: null,
         location: '',
         userID: userId,
+        username: username,
         petType: '',
         statusType: ''
     });
@@ -60,18 +61,6 @@ export default observer(function PostForm() {
         if(id) loadPost(id).then(post => setPost(post!))
     }, [id, loadPost]);
 
-    // const petType = [
-    //     {key: 1, value: 1, text: "CAT"},
-    //     {key: 2, value: 2, text: "DOG"},
-    //     {key: 3, value: 3, text: "ALPACA"},
-    //     {key: 4, value: 4, text: "OTHER"}];
-
-    // const statusType = [
-    //     {key: 1, value: 1, text: "LOST"},
-    //     {key: 2, value: 2, text: "FOUND"},
-    //     {key: 3, value: 3, text: "FOR ADOPTION"}];
-    
-
     function handleFormSubmit(post: Post) {
         if(post.id.length === 0) {
             let newPost = {
@@ -84,23 +73,7 @@ export default observer(function PostForm() {
         }
     }
 
-    // function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    //     const{name, value} = event.target;
-    //     setPost({...post, [name]: value})
-    // }
-
-    // const handleDropDownSelectPet = (event: any, data: any) => {
-    //     const name = 'petType';
-    //     const value = petType[data.value-1].text;
-    //     setPost({...post, [name]: value})
-    //    };
-
-    // const handleDropDownSelectStatus = (event: any, data: any) => {
-    //     const name = 'statusType';
-    //     const value = statusType[data.value-1].text;
-    //     setPost({...post, [name]: value})
-    //     };
-
+    
     if(loadingInitial) return <LoadingComponent />
         
     return (

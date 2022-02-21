@@ -30,9 +30,14 @@ export default function PostListItem({post}: Props) {
                             <Item.Header as ={Link} to={`/posts/${post.id}`}>
                                 {post.title}
                             </Item.Header>
-                            <Item.Description>
-                                Posted by Bob
-                            </Item.Description>
+                            
+                                {post.username &&
+                                <Item.Description>
+                                Posted by {post.username}
+                                </Item.Description>
+                                }
+                                
+                            
                         </Item.Content>
                     </Item>
 
@@ -44,9 +49,6 @@ export default function PostListItem({post}: Props) {
                     <Icon name='marker'/>{post.location}
                     
                 </span>
-            </Segment>
-            <Segment secondary>
-                Attendes go here
             </Segment>
             <Segment clearing>
                 <span>
