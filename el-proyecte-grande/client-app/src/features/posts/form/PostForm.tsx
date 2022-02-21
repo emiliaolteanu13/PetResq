@@ -15,11 +15,26 @@ import { statusTypeOptions } from "../../../app/common/options/statusTypeOptions
 import MyDateInput from "../../../app/common/form/MyDateInput";
 import { Post } from "../../../app/models/post";
 
+
 export default observer(function PostForm() {
     const history = useHistory();
-    const {postStore} = useStore();
+    const {postStore, commonStore} = useStore();
     const { createPost, updatePost, loading, loadPost, loadingInitial } = postStore;
     const {id} = useParams<{id: string}>();
+
+    function parseJwt (token : any) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+    
+        return JSON.parse(jsonPayload);
+    };
+    const token = parseJwt(commonStore.token);
+    const userId = token.nameid;
+
+    
 
     const[post, setPost] = useState<Post>({
         id:'',
@@ -27,7 +42,7 @@ export default observer(function PostForm() {
         description: '',
         date: null,
         location: '',
-        userID: '84b1ffb1-f1a1-44c4-a8b7-016610c6a135',
+        userID: userId,
         petType: '',
         statusType: ''
     });
@@ -37,8 +52,8 @@ export default observer(function PostForm() {
         description: Yup.string().required('post description is a required field'),
         date: Yup.string().required('date is a required field').nullable(),
         location: Yup.string().required(),
-        animal: Yup.string().required('animal type is a required field'),
-        status: Yup.string().required('post type is a required field')
+        petType: Yup.string().required('animal type is a required field'),
+        statusType: Yup.string().required('post type is a required field')
     })
 
     useEffect(() => {
@@ -100,8 +115,8 @@ export default observer(function PostForm() {
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <MyTextInput name='title' placeholder='Title' />
                     <MyTextArea rows={3} placeholder = 'Description' name='description' />
-                    <MySelectInput name='animal' placeholder = "Animal Type" options={petTypeOptions} />
-                    <MySelectInput name='status' placeholder = "Post type" options={statusTypeOptions} />
+                    <MySelectInput name='petType' placeholder = "Animal Type" options={petTypeOptions} />
+                    <MySelectInput name='statusType' placeholder = "Post type" options={statusTypeOptions} />
                     <MyTextInput placeholder = 'Location' name='location' />
                     <MyDateInput
                         placeholderText = 'Date' 
