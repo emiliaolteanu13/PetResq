@@ -14,7 +14,7 @@ import { petTypeOptions } from "../../../app/common/options/petTypeOptions";
 import { statusTypeOptions } from "../../../app/common/options/statusTypeOptions";
 import MyDateInput from "../../../app/common/form/MyDateInput";
 import { Post } from "../../../app/models/post";
-
+import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 
 export default observer(function PostForm() {
     const history = useHistory();
@@ -35,7 +35,8 @@ export default observer(function PostForm() {
     const userId = token.nameid;
     const username = token.unique_name;
     
-
+    const [address, setAddress] = useState("");
+    const [coordinates, setCoordinates] = useState({lat:0, lng: 0})
     const[post, setPost] = useState<Post>({
         id:'',
         title: '',
@@ -52,7 +53,6 @@ export default observer(function PostForm() {
         title: Yup.string().required('post title is a required field'),
         description: Yup.string().required('post description is a required field'),
         date: Yup.string().required('date is a required field').nullable(),
-        location: Yup.string().required(),
         petType: Yup.string().required('animal type is a required field'),
         statusType: Yup.string().required('post type is a required field')
     })
@@ -67,15 +67,24 @@ export default observer(function PostForm() {
                 ...post,
                 id: uuid()
             };
+            newPost.location = address;
             createPost(newPost).then(() => history.push(`/posts/${newPost.id}`))
         } else {
             updatePost(post).then(() => history.push(`/posts/${post.id}`))
         }
     }
+    const handleSelect = async (value: any) => {
+        const results = await geocodeByAddress(value);
+        const latLng = await getLatLng(results[0])
+        setAddress(value);
+        setCoordinates(latLng);
 
+    }
     
     if(loadingInitial) return <LoadingComponent />
-        
+ 
+    
+    
     return (
         <Segment clearing>
             <Header content='Post Details' sub color='teal' />
@@ -90,7 +99,28 @@ export default observer(function PostForm() {
                     <MyTextArea rows={3} placeholder = 'Description' name='description' />
                     <MySelectInput name='petType' placeholder = "Animal Type" options={petTypeOptions} />
                     <MySelectInput name='statusType' placeholder = "Post type" options={statusTypeOptions} />
-                    <MyTextInput placeholder = 'Location' name='location' />
+                    {/* <MyTextInput placeholder = 'Location' name='location' /> */}
+                    <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>
+                    {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+                        <>
+                    <MyTextInput name='location' {...getInputProps({  placeholder : 'Location', })} />
+                    <div>
+                        {loading && <div>loading...</div>}
+                        
+                        {suggestions.map((suggestion) => {
+                            const style = {
+                                backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                            }
+                            return (
+                                <div {...getSuggestionItemProps(suggestion, { style })}>
+                                    {suggestion.description}
+                                </div>
+                            )
+                        })}
+                    </div>
+                    </>
+                    )}
+                    </PlacesAutocomplete>
                     <MyDateInput
                         placeholderText = 'Date' 
                         name='date'
