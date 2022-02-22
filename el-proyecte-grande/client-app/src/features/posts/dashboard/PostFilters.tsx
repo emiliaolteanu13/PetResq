@@ -13,7 +13,7 @@ export default function PostFilters() {
                 <Menu.Item content='All Posts' as={Link} to='/posts'/>
                 <Menu.Item content='Found' as={Link} to='/status/found' />
                 <Menu.Item content='Lost' as={Link} to='/status/lost'/>
-                <Menu.Item content='For Adoption' as={Link} to='/status/forAdoption'/>
+                <Menu.Item content='For Adoption' as={Link} to='/status/for-adoption'/>
             </Menu>
             <Header />
             <Calendar />
