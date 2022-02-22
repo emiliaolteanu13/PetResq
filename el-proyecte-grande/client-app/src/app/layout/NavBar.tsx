@@ -41,9 +41,9 @@ export default observer (function NavBar() {
                 {
                 !user &&
                     <>
-                    
-                    <Menu.Item position='right' content='Login' onClick={() => modalStore.openModal(<LoginForm/>)} />
-                    <Menu.Item position='right' content='Register' onClick={() => modalStore.openModal(<RegisterForm/>)} />
+                        <Menu.Item content='Login' onClick={() => modalStore.openModal(<LoginForm/>)} />
+                        <Menu.Item content='Register' onClick={() => modalStore.openModal(<RegisterForm/>)} />
+
                     </>
                 }
             </Container>
