@@ -19,6 +19,7 @@ import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponent';
 import ModalContainer from '../common/modals/ModalContainer';
 import UserProfile from '../../features/users/UserProfile';
+import PostsFilteredByStatus from '../../features/posts/dashboard/PostsFilteredByStatus';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
               <Switch>
                 <Route exact path='/posts' component={PostDashboard} />
                 <Route path='/posts/:id' component={PostDetails} />
+                <Route exact path='/status/:status' component={PostsFilteredByStatus}/>
                 <Route key={location.key} path={['/createPost', '/edit/:id']} component={PostForm} />
                 <Route path='/errors' component={TestErrors} />
                 <Route path='/server-error' component={ServerError} />

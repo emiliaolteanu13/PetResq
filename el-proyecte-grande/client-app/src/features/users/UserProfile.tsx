@@ -11,7 +11,7 @@ export default observer(function UserProfile () {
 
     const {postStore, userStore} = useStore();
     const {user} = userStore;
-    const { loadPosts, loadingInitial, postRegistry} = postStore;
+    const { loadPosts, postRegistry} = postStore;
     
     useEffect(() => {
         if(postRegistry.size <= 1) loadPosts();
