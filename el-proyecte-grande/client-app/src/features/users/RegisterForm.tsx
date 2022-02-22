@@ -15,11 +15,11 @@ export default observer(function RegisterForm() {
             onSubmit={(values, {setErrors}) => userStore.register(values).catch(error => 
                 setErrors({error}))}
             validationSchema={Yup.object({
-                displayName: Yup.string().required(),
-                username: Yup.string().required(),
-                email: Yup.string().required().email(),
-                password: Yup.string().required(),
-            })}
+                displayName: Yup.string().required('Display name is a required field'),
+                username: Yup.string().required('User name is a required field'),
+                email: Yup.string().required('Email address is a required field').email('Must be a valid email'),
+                password: Yup.string().required('Password is a required field'),
+            })} 
         >
             {({handleSubmit, isSubmitting, errors, isValid, dirty}) => (
                 <Form className='ui form error' onSubmit={handleSubmit} autoComplete='off'>
