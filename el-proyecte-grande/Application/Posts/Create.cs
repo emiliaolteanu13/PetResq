@@ -1,6 +1,8 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
+using Application.Interfaces;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -38,11 +40,9 @@ namespace Application.Posts
             {
                 var user = await _context.Users.FirstOrDefaultAsync(x =>
                     x.UserName == _userAccessor.GetCurrentUsername());
-
                 
-
+                request.Post.UserID = Guid.Parse(user.Id);
                 _context.Posts.Add(request.Post);
-
                 var result = await _context.SaveChangesAsync() > 0;
 
                 if(!result)
