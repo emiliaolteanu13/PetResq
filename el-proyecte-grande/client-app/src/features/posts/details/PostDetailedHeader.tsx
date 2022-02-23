@@ -44,7 +44,7 @@ export default observer(function PostDetailedHeader({ post }: Props) {
                                 />
                                 <p>{format(post.date!, 'dd MMM yyyy')}</p>
                                <p>
-                                   Posted by {post.username}
+                               Posted by <Link to={`/profiles/${post.username}`}>{post.username}</Link>
                                </p>
                             </Item.Content>
                         </Item>
