@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React from 'react'
 import { Segment, Grid, Icon } from 'semantic-ui-react'
 import { Post } from "../../../app/models/post";
+import Location from '../../location/location';
 
 interface Props {
     post: Post
@@ -27,6 +28,7 @@ export default observer(function PostDetailedInfo({ post }: Props) {
                     </Grid.Column>
                     <Grid.Column width={11}>
                         <span>{post.location}</span>
+                        <Location address={post.location}/>
                     </Grid.Column>
                 </Grid>
             </Segment>
