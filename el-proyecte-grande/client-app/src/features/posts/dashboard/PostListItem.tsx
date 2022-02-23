@@ -16,6 +16,7 @@ export default function PostListItem({post}: Props) {
     const [target, setTarget] = useState('');
 
     function handlePostDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
+        
         setTarget(e.currentTarget.name);
         deletePost(id);
     }
@@ -24,7 +25,7 @@ export default function PostListItem({post}: Props) {
             <Segment>
                 <Item.Group>
                     <Item>
-                        <Item.Image size='tiny' circular src='/assets/logo.png'/>
+                        <Item.Image size='tiny' circular src={'/assets/logo.png'}/> {/* post.petPhoto*/}
 
                         <Item.Content>
                             <Item.Header as ={Link} to={`/posts/${post.id}`}>
@@ -33,7 +34,7 @@ export default function PostListItem({post}: Props) {
                             
                                 {post.username &&
                                 <Item.Description>
-                                Posted by {post.username}
+                                Posted by <Link to={`/profiles/${post.username}`}>{post.username}</Link>
                                 </Item.Description>
                                 }
                                 

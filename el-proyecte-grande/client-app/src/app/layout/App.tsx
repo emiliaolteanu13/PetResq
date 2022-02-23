@@ -8,8 +8,6 @@ import HomePage from '../../features/home/HomePage';
 import PostForm from '../../features/posts/form/PostForm';
 import PostDetails from '../../features/posts/details/PostDetails';
 import Footer from './Footer';
-//@ts-ignore
-import { Helmet } from "react-helmet";
 import TestErrors from '../../features/errors/TestError';
 import { ToastContainer } from 'react-toastify';
 import NotFound from '../../features/errors/NotFound';
@@ -75,11 +73,6 @@ function App() {
           </>
         )}
       />
-      {/* <Helmet>
-            <script>
-            {'let rellax = new Rellax(\'.rellax\',{{horizontal: true, vertical: false, speed: 1.5}});'}
-            </script>
-      </Helmet> */}
     </>
   );
 }
