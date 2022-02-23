@@ -12,13 +12,14 @@ export default observer(function UserProfile () {
     const {postStore, userStore} = useStore();
     const {user} = userStore;
     const { loadPosts, postRegistry} = postStore;
+    const {username} = useParams<{username: string}>();
     
     useEffect(() => {
         if(postRegistry.size <= 1) loadPosts();
       }, [postRegistry.size, loadPosts])
 
     const postsByUser = Array.from(postRegistry.values()).filter(post =>
-        post.username === user?.username)
+        post.username === username)
     if (postStore.loadingInitial) return <LoadingComponent/>
 
     return (
