@@ -11,15 +11,6 @@ interface Props{
 
 export default function PostListItem({post}: Props) {
 
-    const {postStore} = useStore();
-    const { deletePost, loading } = postStore;
-    const [target, setTarget] = useState('');
-
-    function handlePostDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
-        
-        setTarget(e.currentTarget.name);
-        deletePost(id);
-    }
     return (
         <Segment.Group>
             <Segment>

@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react'
+import React, { SyntheticEvent, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Button, Header, Item, Segment, Image, Label } from 'semantic-ui-react'
 import { Post } from "../../../app/models/post";
-// import { format } from 'date-fns';
 import { useStore } from '../../../app/stores/store';
 import {format} from 'date-fns';
+import { history } from '../../..';
 
 
 
@@ -23,8 +23,16 @@ interface Props {
 }
 
 export default observer(function PostDetailedHeader({ post }: Props) {
-    const { userStore } = useStore();
+    const { userStore, postStore } = useStore();
+    const { deletePost, loading } = postStore;
     const { user } = userStore;
+    const [target, setTarget] = useState('');
+    function handlePostDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
+        
+        setTarget(e.currentTarget.name);
+        deletePost(id);
+        history.push('/posts');
+    }
     return (
         <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
@@ -54,7 +62,7 @@ export default observer(function PostDetailedHeader({ post }: Props) {
                     Edit Post
                 </Button>}
                 {user?.username==post.username &&
-                <Button color='red' > Delete</Button>
+                <Button color='red' onClick={(e) => handlePostDelete(e,post.id)} > Delete</Button>
 }
             </Segment>
         </Segment.Group>
