@@ -22,7 +22,9 @@ export default observer(function UserProfile () {
     if (postStore.loadingInitial) return <LoadingComponent/>
 
     return (
+        
         <Fragment>
+            <h1>Profile</h1>
                 {postsByUser.map(post => (
                     <PostListItem key={post.id}  post = {post}></PostListItem>
                 ))}
