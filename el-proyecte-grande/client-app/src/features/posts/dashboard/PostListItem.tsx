@@ -55,13 +55,13 @@ export default function PostListItem({post}: Props) {
                 <span>
                     {post.description}
                 </span>
-                <Button as={Link} to={`posts/${post.id}`} color='teal' floated='right' content='View'/>
+                
             </Segment>
             <Segment>
                 <span>
-                <p>Pet:</p>
-                <Button as={Link} to={`/pet/${post.petType}`} color='grey' floated='left' style={{padding: "7px", marginTop:"-30px", marginLeft: "40px"}}  content={post.petType.toLowerCase()}/>
-                    
+                <p></p>
+                <Button as={Link} to={`/pet/${post.petType}`} color='grey' floated='left' style={{padding: "5px", marginTop:"-20px", marginLeft: "10px"}}  content={post.petType.toLowerCase()}/>
+                <Button as={Link} to={`posts/${post.id}`} color='teal' floated='right' style={{padding: "7px", marginTop:"-20px", marginLeft: "10px"}} content='View'/>  
                 </span>
             </Segment>
         </Segment.Group>

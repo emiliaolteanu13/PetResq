@@ -38,10 +38,7 @@ namespace Application.Posts
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users.FirstOrDefaultAsync(x =>
-                    x.UserName == _userAccessor.GetCurrentUsername());
-                
-                request.Post.UserID = Guid.Parse(user.Id);
+
                 _context.Posts.Add(request.Post);
                 var result = await _context.SaveChangesAsync() > 0;
 
