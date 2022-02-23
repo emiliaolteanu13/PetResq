@@ -17,7 +17,7 @@ export default class PostStore {
 
     get postsByDate() {
         return Array.from(this.postRegistry.values()).sort((a, b) => 
-            a.date!.getTime() - b.date!.getTime());
+            b.date!.getTime() - a.date!.getTime());
     }
 
     loadPosts = async () => {
