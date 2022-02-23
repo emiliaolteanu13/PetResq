@@ -56,6 +56,13 @@ export default function PostListItem({post}: Props) {
                 </span>
                 <Button as={Link} to={`posts/${post.id}`} color='teal' floated='right' content='View'/>
             </Segment>
+            <Segment>
+                <span>
+                <p>Pet:</p>
+                <Button as={Link} to={`/pet/${post.petType}`} color='grey' floated='left'   content={post.petType.toLowerCase()}/>
+                    
+                </span>
+            </Segment>
         </Segment.Group>
     )
 }
