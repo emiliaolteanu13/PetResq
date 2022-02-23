@@ -11,7 +11,7 @@ export default function PostsFilteredByStatus(){
     const {postStore} = useStore();
     const { loadPosts, postRegistry} = postStore;
     let {status} = useParams<{status: string}>();
-    if(status == 'forAdoption'){
+    if(status == 'for-adoption'){
         status = 'for adoption'
     }
     useEffect(() => {
