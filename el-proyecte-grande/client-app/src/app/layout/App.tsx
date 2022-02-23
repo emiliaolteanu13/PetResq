@@ -64,7 +64,7 @@ function App() {
                 <Route path='/errors' component={TestErrors} />
                 <Route path='/server-error' component={ServerError} />
                 <Route path='/login' component={LoginForm} />
-                <Route path='/profile/:username' component={UserProfile}/>
+                <Route path='/profiles/:username' component={UserProfile}/>
                 <Route component={NotFound} />
               </Switch>  
             </Container>

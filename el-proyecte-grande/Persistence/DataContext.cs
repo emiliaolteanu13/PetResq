@@ -19,6 +19,6 @@ namespace Persistence
 
         public DbSet<Post> Posts { get; set; }
 
-        public DbSet<PetPhoto> Photos { get; set; }  
+        public DbSet<Photo> Photos { get; set; }  
     }
 }

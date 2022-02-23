@@ -15,6 +15,7 @@ namespace Domain
         public string PetType { get; set; }
         public string StatusType { get; set; }
         public DateTime Date {get;set;}
+        
     }
     
 }
