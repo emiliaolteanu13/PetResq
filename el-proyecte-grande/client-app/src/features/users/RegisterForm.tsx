@@ -11,7 +11,7 @@ export default observer(function RegisterForm() {
     const {userStore} = useStore();
     return (
         <Formik
-            initialValues={{displayName: '', username: '', email: '', password: '', error: null}}
+            initialValues={{displayName: '', username: '', email: '', password: '', changePassword: '', error: null}}
             onSubmit={(values, {setErrors}) => userStore.register(values).catch(error => 
                 setErrors({error}))}
             validationSchema={Yup.object({
@@ -19,6 +19,13 @@ export default observer(function RegisterForm() {
                 username: Yup.string().required('User name is a required field'),
                 email: Yup.string().required('Email address is a required field').email('Must be a valid email'),
                 password: Yup.string().required('Password is a required field'),
+                changePassword: Yup.string().when("password", {
+                    is: (val: any) => (val && val.length > 0 ? true : false),
+                    then: Yup.string().oneOf(
+                      [Yup.ref("password")],
+                      "Both password need to be the same"
+                    ).required()
+                  })
             })} 
         >
             {({handleSubmit, isSubmitting, errors, isValid, dirty}) => (
@@ -28,6 +35,7 @@ export default observer(function RegisterForm() {
                     <MyTextInput name='username' placeholder='Username' />
                     <MyTextInput name='email' placeholder='Email' />
                     <MyTextInput name='password' placeholder='Password' type='password' />
+                    <MyTextInput name='changePassword' placeholder='Confirmation Password' type='password' />
                     <ErrorMessage 
                         name='error' render={() => 
                         <ValidationErrors errors={errors.error}/>}
