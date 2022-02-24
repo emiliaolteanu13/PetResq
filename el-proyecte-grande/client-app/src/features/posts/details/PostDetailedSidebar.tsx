@@ -34,7 +34,7 @@ export default observer(function ActivityDetailedSidebar ({ post }: Props) {
                         <Image size='tiny' src={'/assets/user.png'} />
                         <Item.Content verticalAlign='middle'>
                             <Item.Header as='h3'>
-                                <Link to={`#`}>{post.username}</Link>
+                                <Link to={`/profiles/${post.username}`}>{post.username}</Link>
                             </Item.Header>
                         </Item.Content>
                         {/*de adaugat si alte campuri */}

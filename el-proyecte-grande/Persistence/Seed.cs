@@ -67,7 +67,7 @@ namespace Persistence
                 {
                     Location = "Piata Romana",
                     UserID = Guid.NewGuid(),
-                    Username = "sssss",
+                    Username = "Jhon",
                     Title = "Lost Dog",
                     Description = "Lost around Piata Romana last night, its a black and white dalmatian",
                     PetType = PetType.DOG.ToString(),
@@ -79,7 +79,7 @@ namespace Persistence
                 {
                     Location = "Parcul Tineretului",
                     UserID = Guid.NewGuid(),
-                    Username = "sssss",
+                    Username = "Michael",
                     Title = "Found Dog",
                     Description = "Found a dirty Dalmatian, under the mud he was black and white, and his name tag says: Cruella",
                     PetType = PetType.DOG.ToString(),
