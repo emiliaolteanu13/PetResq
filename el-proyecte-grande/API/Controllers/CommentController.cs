@@ -2,10 +2,12 @@ using System;
 using System.Threading.Tasks;
 using Application.Comments;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [AllowAnonymous]
     public class CommentController : BaseAPIController
     {
         [HttpGet]
