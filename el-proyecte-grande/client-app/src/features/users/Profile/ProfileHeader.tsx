@@ -24,8 +24,8 @@ export default function ProfileHeader() {
                         </Item>
                     </Item.Group>
                 </Grid.Column>
-                <Grid.Column width={4}>
-                    <Statistic.Group widths={2}>
+                <Grid.Column width={3}>
+                    <Statistic.Group widths={1}>
                         <Statistic label='Posts' value={`${postsByUser.length}`} />
                     </Statistic.Group>
                 </Grid.Column>

@@ -5,35 +5,24 @@ import { Grid, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useStore } from "../../app/stores/store";
 import PostListItem from "../posts/dashboard/PostListItem";
+import ProfileContent from "./Profile/ProfileContent";
 import ProfileHeader from "./Profile/ProfileHeader";
 
 
 export default observer(function UserProfile () {
 
-    const {postStore, userStore} = useStore();
-    const {user} = userStore;
-    const { loadPosts, postRegistry} = postStore;
-    const {username} = useParams<{username: string}>();
     
-    useEffect(() => {
-        if(postRegistry.size <= 1) loadPosts();
-      }, [postRegistry.size, loadPosts])
-
-    const postsByUser = Array.from(postRegistry.values()).filter(post =>
-        post.username === username)
-    if (postStore.loadingInitial) return <LoadingComponent/>
 
     return (
         
-        <Segment>
+        <Fragment>
             <Grid >
                 <Grid.Column  width={16} >
                     <ProfileHeader  />
+                    <ProfileContent />
                 </Grid.Column>
             </Grid>
-                {postsByUser.map(post => (
-                    <PostListItem key={post.id}  post = {post}></PostListItem>
-                ))}
-        </Segment>
+    
+        </Fragment>
     )
 })
