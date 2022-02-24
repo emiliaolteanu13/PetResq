@@ -7,7 +7,7 @@ import { User, UserFormValues } from "../models/user";
 import { history } from "../..";
 import { Comment } from "../models/comment";
 import { request } from "http";
-import { Profile } from "../models/profile";
+
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
