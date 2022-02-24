@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { store } from "../stores/store";
 import { User, UserFormValues } from "../models/user";
 import { history } from "../..";
+import { Comment } from "../models/comment";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -82,9 +83,17 @@ const Account = {
     register: (user: UserFormValues) => requests.post<User>('/account/register', user)
 }
 
+const Comments = {
+    list: () => requests.get<Comment[]>('/comment'),
+    create: (comment: Comment) => axios.post<void>(`/comment`, comment),
+    update: (comment: Comment) => axios.put<void>(`/comment/${comment.id}`, comment),
+    delete : (id: string) => axios.delete<void>(`/comment/${id}`)
+}
+
 const agent = {
     Posts,
-    Account
+    Account,
+    Comments
 }
 
 export default agent;
