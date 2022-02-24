@@ -3,6 +3,7 @@ import CommentStore from "./commentStore";
 import CommonStore from "./commonStore";
 import ModalStore from "./modalStore";
 import PostStore from "./postStore";
+
 import UserStore from "./userStore";
 
 interface Store {
@@ -11,6 +12,7 @@ interface Store {
     userStore: UserStore;
     modalStore: ModalStore;
     commentStore: CommentStore;
+    
 }
 
 export const store: Store = {
@@ -18,7 +20,8 @@ export const store: Store = {
     commonStore : new CommonStore(),
     userStore: new UserStore(),
     modalStore: new ModalStore(),
-    commentStore: new CommentStore()
+    commentStore: new CommentStore(),
+    
 }
 
 export const StoreContext = createContext(store);
