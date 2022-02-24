@@ -61,7 +61,7 @@ export default observer(function ActivityDetailedChat({ post }: Props) {
         // }
     }
 
-    if(loadingInitial) return <LoadingComponent />
+    //if(loadingInitial) return <LoadingComponent />
     return (
         <>
             <Segment
@@ -103,9 +103,10 @@ export default observer(function ActivityDetailedChat({ post }: Props) {
                         disabled={isSubmitting || !dirty || !isValid}
                         loading={loading}
                         floated='right' 
+                        style={{padding: "7px", marginTop:"-14px"}}
                         positive type='submit' 
                         content='Submit'/>
-                    <Button as={Link} to='/posts' floated='right' type='button' content='Cancel'/>
+                    <Button as={Link} to='/posts' floated='right' style={{padding: "7px", marginTop:"-14px"}}    content='Cancel'/>
                 </Form>
                 )}
             </Formik>
