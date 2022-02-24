@@ -21,7 +21,7 @@ export default observer(function UserProfile () {
 
     const postsByUser = Array.from(postRegistry.values()).filter(post =>
         post.username === username)
-    if (postStore.loadingInitial) return <LoadingComponent/>
+    //if (postStore.loadingInitial) return <LoadingComponent/>
 
     return (
         
