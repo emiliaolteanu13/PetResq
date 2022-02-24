@@ -23,7 +23,7 @@ export default observer(function RegisterForm() {
                     is: (val: any) => (val && val.length > 0 ? true : false),
                     then: Yup.string().oneOf(
                       [Yup.ref("password")],
-                      "Both password need to be the same"
+                      "Both passwords need to be the same"
                     ).required()
                   })
             })} 

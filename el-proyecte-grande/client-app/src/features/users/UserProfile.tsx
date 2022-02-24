@@ -9,6 +9,7 @@ import ProfileContent from "./Profile/ProfileContent";
 import ProfileHeader from "./Profile/ProfileHeader";
 
 
+
 export default observer(function UserProfile () {
 
     
