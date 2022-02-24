@@ -4,12 +4,15 @@ using Application.Comments;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using API.Services;
 
 namespace API.Controllers
 {
+    
     [AllowAnonymous]
     public class CommentController : BaseAPIController
     {
+        
         [HttpGet]
         public async Task<IActionResult> GetAllComments(){
             return HandleResult ( await Mediator.Send(new List.Query()));
