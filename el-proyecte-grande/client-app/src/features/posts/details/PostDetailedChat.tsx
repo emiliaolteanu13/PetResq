@@ -17,7 +17,7 @@ interface Props {
 export default observer(function ActivityDetailedChat({ post }: Props) {
     const {commentStore, commonStore} = useStore();
     const history = useHistory();
-    const { loadComments, commentRegistry, createComment, loadingInitial} = commentStore;
+    const { loadComments, commentRegistry, createComment, loadingInitial, loading} = commentStore;
     useEffect(() => {
         if(commentRegistry.size <= 1) loadComments();
       }, [commentRegistry.size, loadComments])
@@ -93,14 +93,15 @@ export default observer(function ActivityDetailedChat({ post }: Props) {
                     enableReinitialize 
                 initialValues={comment} 
                 onSubmit={values => handleFormSubmit(values)}>
-                {({handleSubmit}) => (
+                {({handleSubmit,isValid, isSubmitting, dirty}) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     
                     <MyTextArea rows={3} placeholder = 'text' name='text' />
                     
                     
                     <Button
-                    
+                        disabled={isSubmitting || !dirty || !isValid}
+                        loading={loading}
                         floated='right' 
                         positive type='submit' 
                         content='Submit'/>
