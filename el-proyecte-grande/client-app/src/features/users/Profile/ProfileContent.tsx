@@ -6,7 +6,7 @@ import ProfilePosts from "./ProfilePosts";
 
 export default observer(function ProfileContent() {
     const panes = [
-        {menuItem: 'About', render: () => <Tab.Pane>About Content</Tab.Pane>},
+        {menuItem: 'About', render: () => <Tab.Pane>About</Tab.Pane>},
         {menuItem: 'Posts', render: () => <ProfilePosts />},
         {menuItem: 'Photos', render: () => <ProfilePhotos />}
 
