@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Fragment, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Grid } from "semantic-ui-react";
+import { Grid, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useStore } from "../../app/stores/store";
 import PostListItem from "../posts/dashboard/PostListItem";
@@ -25,15 +25,15 @@ export default observer(function UserProfile () {
 
     return (
         
-        <Fragment>
-            <Grid>
-                <Grid.Column  width={16}>
+        <Segment>
+            <Grid >
+                <Grid.Column  width={16} >
                     <ProfileHeader  />
                 </Grid.Column>
             </Grid>
                 {postsByUser.map(post => (
                     <PostListItem key={post.id}  post = {post}></PostListItem>
                 ))}
-        </Fragment>
+        </Segment>
     )
 })
