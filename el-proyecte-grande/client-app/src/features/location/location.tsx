@@ -22,7 +22,7 @@ export default function Location({address}: props){
     const lng = latLng.lng;
     const WrappedMap = withScriptjs(withGoogleMap(() =>
     <GoogleMap
-        defaultZoom={8}
+        defaultZoom={15}
         defaultCenter={{ lat: lat, lng: lng }}
     >
         <Marker position={{ lat: lat, lng: lng }} />

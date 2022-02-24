@@ -6,6 +6,7 @@ import { Post } from "../../../app/models/post";
 import { useStore } from '../../../app/stores/store';
 import {format} from 'date-fns';
 import { history } from '../../..';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
 
 
 
@@ -24,15 +25,17 @@ interface Props {
 
 export default observer(function PostDetailedHeader({ post }: Props) {
     const { userStore, postStore } = useStore();
-    const { deletePost, loading } = postStore;
+    const { deletePost } = postStore;
     const { user } = userStore;
     const [target, setTarget] = useState('');
     function handlePostDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         
         setTarget(e.currentTarget.name);
-        deletePost(id);
-        history.push('/posts');
+        deletePost(id).then(() => history.push('/posts'));
     }
+
+    
+
     return (
         <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
