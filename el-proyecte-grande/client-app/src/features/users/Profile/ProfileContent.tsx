@@ -1,12 +1,14 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
 import { Tab } from "semantic-ui-react";
+import ProfilePhotos from "./ProfilePhotos";
 import ProfilePosts from "./ProfilePosts";
 
-export default function ProfileContent() {
+export default observer(function ProfileContent() {
     const panes = [
         {menuItem: 'About', render: () => <Tab.Pane>About Content</Tab.Pane>},
         {menuItem: 'Posts', render: () => <ProfilePosts />},
-        {menuItem: 'Photos', render: () => <Tab.Pane>Posts Content</Tab.Pane>}
+        {menuItem: 'Photos', render: () => <ProfilePhotos />}
 
     ];
 
@@ -17,4 +19,4 @@ export default function ProfileContent() {
             panes={panes}
         />
     )
-}
+})
