@@ -5,6 +5,7 @@ import { Grid } from "semantic-ui-react";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useStore } from "../../app/stores/store";
 import PostListItem from "../posts/dashboard/PostListItem";
+import ProfileHeader from "./Profile/ProfileHeader";
 
 
 export default observer(function UserProfile () {
@@ -25,7 +26,11 @@ export default observer(function UserProfile () {
     return (
         
         <Fragment>
-            <h1>Profile</h1>
+            <Grid>
+                <Grid.Column  width={16}>
+                    <ProfileHeader  />
+                </Grid.Column>
+            </Grid>
                 {postsByUser.map(post => (
                     <PostListItem key={post.id}  post = {post}></PostListItem>
                 ))}
