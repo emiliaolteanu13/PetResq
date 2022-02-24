@@ -131,8 +131,9 @@ export default observer(function PostForm() {
                         loading={loading} 
                         floated='right' 
                         positive type='submit' 
-                        content='Submit'/>
-                    <Button as={Link} to='/posts' floated='right' type='button' content='Cancel'/>
+                        content='Submit'
+                        style={{padding: "7px"}}/>
+                    <Button as={Link} to='/posts' floated='right' type='button' style={{padding: "7px"}} content='Cancel'/>
                 </Form>
                 )}
             </Formik>
