@@ -21,9 +21,13 @@ namespace API.Controllers
         [HttpGet("status/{status}")]
         public async Task<IActionResult> PostByStatus(string status)
         {
-            if(status == "forAdoption" || status == "for-adoption")
-                status = "FOR_ADOPTION";
             return HandleResult(await Mediator.Send(new PostsFilteredByStatus.Query { Status = status }));
+        }
+
+        [HttpGet("pet/{pet}")]
+        public async Task<IActionResult> PostByPet(string pet)
+        {
+            return HandleResult(await Mediator.Send(new PostsFilteredByPet.Query { Pet = pet}));
         }
 
         [HttpGet("{id}")]

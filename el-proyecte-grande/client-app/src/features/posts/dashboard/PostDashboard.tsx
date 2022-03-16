@@ -11,18 +11,22 @@ import PostList from "./PostList";
 export default observer (function PostDashboard() {
 
     const {postStore} = useStore();
-    const {loadPosts, postRegistry, loadPostsByStatus} = postStore;
-    let {filter} = useParams<{filter: string}>();
+    const {loadPosts, postRegistry, loadPostsByStatus, loadPostsByPet} = postStore;
+    let {status} = useParams<{status: string}>();
+    let {pet} = useParams<{pet: string}>();
  
     
     useEffect(() => {
-        if(filter){
-            loadPostsByStatus(filter)
+        if(status){
+            loadPostsByStatus(status)
         }
-        else if(!filter) {
+        else if(pet){
+            loadPostsByPet(pet)
+        }
+        else if(!status && !pet) {
             loadPosts();
     }
-    }, [loadPosts, filter])
+    }, [loadPosts, status, pet])
 
     useEffect(() => {
         

@@ -51,6 +51,22 @@ export default class PostStore {
         }
     }
 
+    loadPostsByPet = async(pet: string) => {
+        this.postRegistry = new Map<string, Post>();
+        this.loadingInitial = true;
+        try {
+            const posts = await agent.Posts.postsByPet(pet);
+            posts.forEach(post => {
+                this.setPost(post);
+            })
+            this.setLoadingInitial(false);    
+        } catch (error) {
+            console.log(error);
+            this.setLoadingInitial(false);
+        
+        }
+    }
+
     loadPost = async (id: string) => {
         let post = this.getPost(id);
         if (post) {

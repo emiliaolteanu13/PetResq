@@ -77,7 +77,8 @@ const Posts = {
     create: (post: Post) => axios.post<void>('/posts', post),
     update: (post: Post) => axios.put<void>(`/posts/${post.id}`, post),
     delete: (id: string) => axios.delete<void>(`/posts/${id}`),
-    postsByStatus: (status: string) => requests.get<Post[]>(`posts/status/${status}`)
+    postsByStatus: (status: string) => requests.get<Post[]>(`posts/status/${status}`),
+    postsByPet: (pet: string) => requests.get<Post[]>(`/posts/pet/${pet}`)
 
 }
 

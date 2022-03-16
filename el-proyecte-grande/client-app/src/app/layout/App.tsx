@@ -55,7 +55,7 @@ function App() {
             <NavBar />
             <Container style={{marginTop: '10em'}}>
               <Switch>
-                <Route exact path={['/posts', '/filter/:filter']} component={PostDashboard} />
+                <Route exact path={['/posts', '/status/:status', '/pet/:pet']} component={PostDashboard} />
                 <Route path='/posts/:id' component={PostDetails} />
                 {/* <Route exact path='/status/:status' component={PostsFilteredByStatus}/>
                 <Route exact path='/pet/:pet' component={PostsFilteredByPet}/> */}
