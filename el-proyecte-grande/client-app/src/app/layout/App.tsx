@@ -17,8 +17,6 @@ import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponent';
 import ModalContainer from '../common/modals/ModalContainer';
 import UserProfile from '../../features/users/UserProfile';
-import PostsFilteredByStatus from '../../features/posts/dashboard/PostsFilteredByStatus';
-import PostsFilteredByPet from '../../features/posts/dashboard/PostsFilteredByPet';
 
 
 
@@ -57,10 +55,10 @@ function App() {
             <NavBar />
             <Container style={{marginTop: '10em'}}>
               <Switch>
-                <Route exact path='/posts' component={PostDashboard} />
+                <Route exact path={['/posts', '/filter/:filter']} component={PostDashboard} />
                 <Route path='/posts/:id' component={PostDetails} />
-                <Route exact path='/status/:status' component={PostsFilteredByStatus}/>
-                <Route exact path='/pet/:pet' component={PostsFilteredByPet}/>
+                {/* <Route exact path='/status/:status' component={PostsFilteredByStatus}/>
+                <Route exact path='/pet/:pet' component={PostsFilteredByPet}/> */}
                 <Route key={location.key} path={['/createPost', '/edit/:id']} component={PostForm} />
                 <Route path='/errors' component={TestErrors} />
                 <Route path='/server-error' component={ServerError} />

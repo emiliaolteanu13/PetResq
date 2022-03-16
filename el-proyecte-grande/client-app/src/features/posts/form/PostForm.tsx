@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { Button, Header, Label, Segment } from "semantic-ui-react";
+import { Button, Header, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
 import { v4 as uuid } from 'uuid';
-import { Formik, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from 'yup';
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MyTextArea from "../../../app/common/form/MyTextArea";
@@ -99,7 +99,7 @@ export default observer(function PostForm() {
                     <MyTextArea rows={3} placeholder = 'Description' name='description' />
                     <MySelectInput name='petType' placeholder = "Animal Type" options={petTypeOptions} />
                     <MySelectInput name='statusType' placeholder = "Post type" options={statusTypeOptions} />
-                    {/* <MyTextInput placeholder = 'Location' name='location' /> */}
+                    
                     <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>
                     {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
                         <>
@@ -112,7 +112,7 @@ export default observer(function PostForm() {
                                 backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
                             }
                             return (
-                                <div {...getSuggestionItemProps(suggestion, { style })}>
+                                <div {...getSuggestionItemProps(suggestion, { style })} key={suggestion.id}>
                                     {suggestion.description}
                                 </div>
                             )

@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Grid, GridColumn, Header, Item, Segment, Statistic } from "semantic-ui-react";
+import { Grid,  Header, Item, Segment, Statistic } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 
 export default function ProfileHeader() {

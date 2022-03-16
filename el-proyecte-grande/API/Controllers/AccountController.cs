@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace API.Controllers
 {
-    [AllowAnonymous]
+    
     [ApiController]
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
@@ -26,6 +26,7 @@ namespace API.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
@@ -43,6 +44,7 @@ namespace API.Controllers
             }
             return Unauthorized();
         }
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
@@ -83,6 +85,7 @@ namespace API.Controllers
 
             return CreateUserObject(user);
         }
+        [AllowAnonymous]
         private UserDto CreateUserObject(AppUser user)
         {
             return new UserDto

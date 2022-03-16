@@ -1,10 +1,6 @@
 import { observer } from "mobx-react-lite";
-import { Fragment, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Grid, Segment } from "semantic-ui-react";
-import LoadingComponent from "../../app/layout/LoadingComponent";
-import { useStore } from "../../app/stores/store";
-import PostListItem from "../posts/dashboard/PostListItem";
+import { Fragment} from "react";
+import { Grid } from "semantic-ui-react";
 import ProfileContent from "./Profile/ProfileContent";
 import ProfileHeader from "./Profile/ProfileHeader";
 

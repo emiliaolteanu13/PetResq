@@ -1,18 +1,11 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Grid, Header, Icon, Segment, Tab } from "semantic-ui-react";
-import { useStore } from "../../../app/stores/store";
-import { UserFormValues } from "../../../app/models/user";
 
 
 
 
 export default observer(function ProfileHeader() {
-    const {postStore, userStore} = useStore();
-    const {user} = userStore;
-    const {postRegistry} = postStore;
-    const {username} = useParams<{username: string}>()
     
    
     return (

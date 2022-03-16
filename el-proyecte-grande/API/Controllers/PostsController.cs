@@ -12,13 +12,19 @@ namespace API.Controllers
     {
 
         
-        [HttpGet] // posts
+        [HttpGet]
         public async Task<IActionResult> GetAllPosts()
         {
             return HandleResult( await Mediator.Send(new List.Query()));
         }
 
-        [HttpGet("{id}")] // posts/id
+        [HttpGet("status/{status}")]
+        public async Task<IActionResult> PostByStatus(string status)
+        {
+            return HandleResult(await Mediator.Send(new PostsFilteredByStatus.Query { Status = status }));
+        }
+
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetPost(Guid id)
         {
 

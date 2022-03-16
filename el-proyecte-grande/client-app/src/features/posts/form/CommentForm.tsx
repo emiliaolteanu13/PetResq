@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
 import { v4 as uuid } from 'uuid'
@@ -16,7 +15,7 @@ interface Props {
 export default observer(function CommentForm({ post }: Props) {
     const {commentStore, commonStore} = useStore();
     const history = useHistory();
-    const { loadComments, commentRegistry, createComment, loadingInitial, loading} = commentStore;
+    const { createComment, loading} = commentStore;
 
     function parseJwt (token : any) {
         var base64Url = token.split('.')[1];
@@ -30,17 +29,17 @@ export default observer(function CommentForm({ post }: Props) {
     const token = parseJwt(commonStore.token);
     const userId = token.nameid;
     const username = token.unique_name;
-    const [comment, setComment] = useState({
+    const comment = {
         id: '',
         text: '',
         userId: userId,
         username: username,
         postId: post.id,
         //date: null
-    });
-    const commentsByPost = Array.from(commentRegistry.values()).filter(comment => 
-        comment.postId === post.id
-    );
+    };
+    // const commentsByPost = Array.from(commentRegistry.values()).filter(comment => 
+    //     comment.postId === post.id
+    // );
     
     function handleFormSubmit(comment: comm) {
         if(comment.id.length === 0) {
@@ -48,7 +47,7 @@ export default observer(function CommentForm({ post }: Props) {
                 ...comment,
                 id: uuid()
             };
-            const now = new Date();
+            // const now = new Date();
             //newComment.date = now;
             createComment(newComment).then(() => history.push(`/posts/${post.id}`))
         } 

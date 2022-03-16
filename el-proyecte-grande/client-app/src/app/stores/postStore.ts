@@ -35,6 +35,22 @@ export default class PostStore {
         }
     }
 
+    loadPostsByStatus = async(status: string) => {
+        this.postRegistry = new Map<string, Post>();
+        this.loadingInitial = true;
+        try {
+            const posts = await agent.Posts.postsByStatus(status);
+            posts.forEach(post => {
+                this.setPost(post);
+            })
+            this.setLoadingInitial(false);    
+        } catch (error) {
+            console.log(error);
+            this.setLoadingInitial(false);
+        
+        }
+    }
+
     loadPost = async (id: string) => {
         let post = this.getPost(id);
         if (post) {
