@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { Button, Header, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
 import { v4 as uuid } from 'uuid';
@@ -15,6 +14,7 @@ import { statusTypeOptions } from "../../../app/common/options/statusTypeOptions
 import MyDateInput from "../../../app/common/form/MyDateInput";
 import { Post } from "../../../app/models/post";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
+import { Button, Header, Segment } from "semantic-ui-react";
 
 export default observer(function PostForm() {
     const history = useHistory();
