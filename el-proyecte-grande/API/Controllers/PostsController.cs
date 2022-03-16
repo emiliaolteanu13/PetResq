@@ -21,6 +21,8 @@ namespace API.Controllers
         [HttpGet("status/{status}")]
         public async Task<IActionResult> PostByStatus(string status)
         {
+            if(status == "forAdoption" || status == "for-adoption")
+                status = "FOR_ADOPTION";
             return HandleResult(await Mediator.Send(new PostsFilteredByStatus.Query { Status = status }));
         }
 

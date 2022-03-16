@@ -17,11 +17,9 @@ export default observer (function PostDashboard() {
     
     useEffect(() => {
         if(filter){
-            if(filter === 'for-adoption') filter = 'for_adoption'
-            console.log(filter)
             loadPostsByStatus(filter)
         }
-        else if(postRegistry.size <= 1 && !filter) {
+        else if(!filter) {
             loadPosts();
     }
     }, [loadPosts, filter])
