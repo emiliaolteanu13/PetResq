@@ -15,6 +15,8 @@ import MyDateInput from "../../../app/common/form/MyDateInput";
 import { Post } from "../../../app/models/post";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 import { Button, Header, Segment } from "semantic-ui-react";
+import Dropzone from './ImageUpload';
+
 
 export default observer(function PostForm() {
     const history = useHistory();
@@ -134,10 +136,10 @@ export default observer(function PostForm() {
                         content='Submit'
                         style={{padding: "7px"}}/>
                     <Button as={Link} to='/posts' floated='right' type='button' style={{padding: "7px"}} content='Cancel'/>
+                    <Dropzone/>
                 </Form>
                 )}
             </Formik>
-            
         </Segment>
     )
 })
