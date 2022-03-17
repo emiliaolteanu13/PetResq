@@ -3,15 +3,23 @@ using System.Linq;
 using Domain;
 using Persistence;
 
-namespace API.Services
+namespace Application.Services
 {
     public class EmailService
     {
         private DataContext _context { get; set; }
         public Comment Comment{get;set;}
-        public EmailService(DataContext context, Comment comment){
+        private EmailSenderService _emailSenderService { get; set; }
+        public EmailService(DataContext context, Comment comment)
+        {
             _context = context;
             Comment = comment;
+            _emailSenderService = new EmailSenderService();
+
+        }
+        public Post GetPost()
+        {
+            return _context.Posts.Where(p => p.ID == Comment.PostId).FirstOrDefault();
         }
         public string GetUserEmail()
         {
@@ -29,7 +37,7 @@ namespace API.Services
 
         public async void SendEmail()
         {
-            await EmailSenderService.Execute(GetUserEmail(), GetUserName());
+            await _emailSenderService.Execute(GetUserEmail(), GetUserName());
         }
     }
 }

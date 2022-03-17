@@ -18,12 +18,18 @@ namespace API
     {
         public static async Task Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            var host = CreateHostBuilder(args).ConfigureAppConfiguration((hostContext, builder) =>
+            {
+                if (hostContext.HostingEnvironment.IsDevelopment())
+                {
+                    builder.AddUserSecrets<Program>();
+                }
+            }).Build();
 
             using var scope = host.Services.CreateScope();
 
             var services = scope.ServiceProvider;
-
+            
             try 
             {
                 var context = services.GetRequiredService<DataContext>();

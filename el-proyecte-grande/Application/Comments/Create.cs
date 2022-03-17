@@ -6,7 +6,8 @@ using Domain;
 using FluentValidation;
 using MediatR;
 using Persistence;
-using API.Services;
+using Application.Services;
+using Microsoft.Extensions.Options;
 
 namespace Application.Comments
 {
@@ -22,8 +23,7 @@ namespace Application.Comments
         {
             private readonly DataContext _context;
             private EmailService _emailService;
-
-            public Handler(DataContext context, IUserAccessor userAccessor )
+            public Handler(DataContext context)
             {
                 
                 _context = context;

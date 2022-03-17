@@ -21,6 +21,7 @@ using Application.Core;
 using API.Controllers.Extensions;
 using FluentValidation.AspNetCore;
 using API.Middleware;
+using Application.Services;
 
 namespace API
 {
@@ -37,6 +38,7 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<EmailApiKeyConfig>(_config.GetSection("EmailApiKey"));
             services.AddControllers(opt => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
