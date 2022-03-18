@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
@@ -16,7 +16,6 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>14e93394-9317-4040-a7d5-08c5fa720496</UserSecretsId>
   </PropertyGroup>
 
 </Project>

@@ -20,9 +20,12 @@ import Dropzone from './ImageUpload';
 
 export default observer(function PostForm() {
     const history = useHistory();
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const {postStore, commonStore} = useStore();
     const { createPost, updatePost, loading, loadPost, loadingInitial } = postStore;
     const {id} = useParams<{id: string}>();
+    const [postId, setPostId] = useState('');
+    if(id) setPostId(id);
 
     function parseJwt (token : any) {
         var base64Url = token.split('.')[1];
@@ -64,11 +67,13 @@ export default observer(function PostForm() {
     }, [id, loadPost]);
 
     function handleFormSubmit(post: Post) {
+        setIsSubmitted(true);
         if(post.id.length === 0) {
             let newPost = {
                 ...post,
                 id: uuid()
             };
+            setPostId(newPost.id);
             newPost.location = address;
             createPost(newPost).then(() => history.push(`/posts/${newPost.id}`))
         } else {
@@ -128,6 +133,7 @@ export default observer(function PostForm() {
                         name='date'
                         dateFormat='MMMM d, yyyy'
                     />
+                    <Dropzone isSubmitted={isSubmitted} postId={postId}/>
                     <Button
                         disabled={isSubmitting || !dirty || !isValid}
                         loading={loading} 
@@ -136,7 +142,7 @@ export default observer(function PostForm() {
                         content='Submit'
                         style={{padding: "7px"}}/>
                     <Button as={Link} to='/posts' floated='right' type='button' style={{padding: "7px"}} content='Cancel'/>
-                    <Dropzone/>
+                    
                 </Form>
                 )}
             </Formik>

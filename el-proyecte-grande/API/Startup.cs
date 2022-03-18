@@ -29,16 +29,20 @@ namespace API
     {
         private readonly IConfiguration _config;
 
+        private string _emailApiKey = null;
+
         public Startup(IConfiguration config)
         {
             _config = config;
         }
 
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<EmailApiKeyConfig>(_config.GetSection("EmailApiKey"));
+            _emailApiKey = _config["EmailApiKey"];
+            services.AddSingleton(x =>
+                new EmailSenderService(_emailApiKey));
             services.AddControllers(opt => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));

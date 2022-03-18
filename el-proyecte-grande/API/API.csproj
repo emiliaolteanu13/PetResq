@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>3d53c9c6-10c1-4d05-baf0-85bab23a4c6a</UserSecretsId>
+    <UserSecretsId>8b2fa317-51b8-4aee-b947-478a68bc221d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

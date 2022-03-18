@@ -16,6 +16,7 @@ namespace Application.Comments
         public class Command : IRequest<Result<Unit>>
         {
             public Comment Comment { get; set; }
+            public EmailSenderService EmailSender { get; set; }
         }
         
 
@@ -32,7 +33,7 @@ namespace Application.Comments
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                _emailService = new EmailService(_context, request.Comment);
+                _emailService = new EmailService(_context, request.Comment,request.EmailSender) ;
                 _context.Comments.Add(request.Comment);
                 _emailService.SendEmail();
                 var result = await _context.SaveChangesAsync() > 0;

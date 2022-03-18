@@ -7,6 +7,7 @@ import { User, UserFormValues } from "../models/user";
 import { history } from "../..";
 import { Comment } from "../models/comment";
 import { request } from "http";
+import { PetPhoto } from "../models/petPhoto";
 
 
 const sleep = (delay: number) => {
@@ -95,12 +96,17 @@ const Comments = {
     delete : (id: string) => axios.delete<void>(`/comment/${id}`)
 }
 
+const PetPhotos = {
+    list: (postId: string) => requests.get<PetPhoto[]>(`/petPhotos/${postId}`),
+    create: (photo: any) => axios.post<void>(`/petPhotos`, photo)
+}
+
 
 const agent = {
     Posts,
     Account,
     Comments,
-    
+    PetPhotos
 }
 
 export default agent;

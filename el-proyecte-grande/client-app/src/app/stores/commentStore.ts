@@ -13,11 +13,6 @@ export default class CommentStore{
         makeAutoObservable(this)
     }
 
-    // get commentsByDate() {
-    //     return Array.from(this.commentRegistry.values()).sort((a, b) => 
-    //         b.date!.getTime() - a.date!.getTime());
-    // }
-
     loadComments = async () => {
         this.loadingInitial = true;
         //async code

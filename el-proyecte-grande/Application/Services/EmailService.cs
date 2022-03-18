@@ -9,12 +9,12 @@ namespace Application.Services
     {
         private DataContext _context { get; set; }
         public Comment Comment{get;set;}
-        private EmailSenderService _emailSenderService { get; set; }
-        public EmailService(DataContext context, Comment comment)
+        private EmailSenderService _emailSenderService { get; }
+        public EmailService(DataContext context, Comment comment, EmailSenderService emailSenderService)
         {
             _context = context;
             Comment = comment;
-            _emailSenderService = new EmailSenderService();
+            _emailSenderService = emailSenderService;
 
         }
         public Post GetPost()
@@ -37,7 +37,7 @@ namespace Application.Services
 
         public async void SendEmail()
         {
-            await _emailSenderService.Execute(GetUserEmail(), GetUserName());
+            await _emailSenderService.Execute(GetUserEmail(), GetUserName(), Comment, GetPost());
         }
     }
 }
