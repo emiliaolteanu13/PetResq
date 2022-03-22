@@ -5,24 +5,23 @@ import { Post } from '../../../app/models/post';
 import { useStore } from '../../../app/stores/store';
 import {format} from 'date-fns';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
+import { observer } from 'mobx-react-lite';
 
 interface Props{
     post: Post
 }
 
-export default function PostListItem({post}: Props) {
+export default observer(function PostListItem({post}: Props) {
 
     const {petPhotoStore} = useStore();
     const { loadPetPhotos, petPhotoRegistry} = petPhotoStore;
     useEffect(()=>{
         if(petPhotoRegistry.size <= 1) loadPetPhotos();
-        
     }, [petPhotoRegistry.size, loadPetPhotos])
     const photosByPost = Array.from(petPhotoRegistry.values()).filter(photo =>
         photo.postId === post.id
     )
 
-    console.log(Array.from(petPhotoRegistry.values()))
     if(petPhotoStore.loadingInitial) return <LoadingComponent/>
     return (
         <Segment.Group>
@@ -73,4 +72,4 @@ export default function PostListItem({post}: Props) {
             </Segment>
         </Segment.Group>
     )
-}
+})

@@ -24,8 +24,6 @@ export default class PetPhotoStore{
                 this.setPetPhoto(petPhoto);
             })
             this.setLoadingInitial(false);    
-            console.log(Array.from(this.petPhotoRegistry.values()))
-            console.log(this.petPhotoRegistry.size)
         } catch (error) {
             console.log(error);
             this.setLoadingInitial(false);
