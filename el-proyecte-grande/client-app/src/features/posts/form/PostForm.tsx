@@ -105,13 +105,10 @@ export default observer(function PostForm() {
     }
 
     const uploadMultipleFiles = (event: any)=> {
-        console.log(event.target.files)
-        fileObj.push(event.target.files[0])
-        console.log(fileObj)
-        // fileObj.push(event.currentTarget.value)
-        // for (let i = 0; i < fileObj[0].length; i++) {
-        //     fileArray.push(URL.createObjectURL(fileObj[0][i]))
-        // }
+      
+        for(let i = 0; i < event.target.files.length; i++){
+            fileObj.push(event.target.files[i]);
+        }
     }
 
     

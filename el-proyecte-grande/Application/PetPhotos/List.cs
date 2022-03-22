@@ -14,10 +14,7 @@ namespace Application.PetPhotos
 {
     public class List
     {
-        public class Query : IRequest<Result<List<PetPhoto>>> 
-        {
-            public Guid PostId { get; set; }
-        }
+        public class Query : IRequest<Result<List<PetPhoto>>> { }
 
         public class Handler : IRequestHandler<Query, Result<List<PetPhoto>>>
         {
@@ -29,7 +26,7 @@ namespace Application.PetPhotos
 
             public async Task<Result<List<PetPhoto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return Result<List<PetPhoto>>.Success(await _context.PetPhotos.Where(p => p.PostId==request.PostId.ToString()).ToListAsync(cancellationToken));
+                return Result<List<PetPhoto>>.Success(await _context.PetPhotos.ToListAsync(cancellationToken));
             }
         }
     }

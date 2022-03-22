@@ -96,7 +96,7 @@ const Comments = {
 }
 
 const PetPhotos = {
-    list: (postId: string) => requests.get<any[]>(`/petPhotos/${postId}`),
+    list: () => requests.get<any[]>(`/petPhotos`),
     create: (petPhoto : any) => axios.post<void>(`/petPhotos`, petPhoto)
 }
 

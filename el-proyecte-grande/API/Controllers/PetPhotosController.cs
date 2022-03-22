@@ -12,10 +12,10 @@ namespace API.Controllers
     [AllowAnonymous]
     public class PetPhotosController : BaseAPIController
     {
-        [HttpGet("{postId}")]
-        public async Task<IActionResult> GetPetPhotos(Guid postId)
+        [HttpGet]
+        public async Task<IActionResult> GetPetPhotos()
         {
-            return HandleResult(await Mediator.Send(new List.Query { PostId = postId }));
+            return HandleResult(await Mediator.Send(new List.Query()));
         }
 
         [HttpPost]

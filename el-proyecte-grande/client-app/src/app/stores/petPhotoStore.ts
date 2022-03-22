@@ -15,15 +15,17 @@ export default class PetPhotoStore{
         return Array.from(this.petPhotoRegistry.values());
     }
 
-    loadPetPhotos = async (postId: string) => {
+    loadPetPhotos = async () => {
         this.loadingInitial = true;
         try {
-            const petPhotos = await agent.PetPhotos.list(postId);
+            const petPhotos = await agent.PetPhotos.list();
             
             petPhotos.forEach(petPhoto => {
                 this.setPetPhoto(petPhoto);
             })
             this.setLoadingInitial(false);    
+            console.log(Array.from(this.petPhotoRegistry.values()))
+            console.log(this.petPhotoRegistry.size)
         } catch (error) {
             console.log(error);
             this.setLoadingInitial(false);
