@@ -24,7 +24,7 @@ export default observer (function NavBar() {
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/posts' name='Posts' />
                 {
-                    user &&<Menu.Item as={NavLink} to='/createPost' positive content='Create Post' />
+                    user &&<Menu.Item as={NavLink} to='/createPost' content='Create Post' />
                 }
                 {user &&
                 <Menu.Item position='right'>
@@ -33,7 +33,7 @@ export default observer (function NavBar() {
                         <Dropdown.Menu>
                             <Dropdown.Item as={Link} to={`/profiles/${user?.username}`} 
                                 text='My Profile' icon='user' />
-                            <Dropdown.Item as={Link} onClick={logout} text='Logout' icon='power' />
+                            <Dropdown.Item onClick={logout} text='Logout' icon='power' />
                         </Dropdown.Menu>
                     </Dropdown> 
                 </Menu.Item>
