@@ -29,8 +29,9 @@ export default function PostListItem({post}: Props) {
             <Segment>
                 <Item.Group>
                     <Item>
-                        {photosByPost.length > 0 && 
+                        {photosByPost.length !== 0 ? 
                         <Item.Image size='tiny' circular src={`data:image/png;base64,${photosByPost[0].content}`}/>
+                        : <Item.Image size='tiny' circular src={`/assets/dalmatian.jpg`}/>
                         }
                         
 

@@ -40,19 +40,21 @@ export default observer(function PostDetailedHeader({ post }: Props) {
     )
 
     console.log(Array.from(petPhotoRegistry.values()))
-    
+    if(petPhotoStore.loadingInitial) return <LoadingComponent/>
     function handlePostDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         
         setTarget(e.currentTarget.name);
         deletePost(id).then(() => history.push('/posts'));
     }
 
-    if(petPhotoStore.loadingInitial) return <LoadingComponent/>
+    
 
     return (
         <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
-                <Image src={`data:image/png;base64,${photosByPost[0].content}`} fluid />
+            {/* `data:image/png;base64,${photosByPost[0].content}` `/assets/dalmatian.jpg` */}
+            {photosByPost.length > 0 ? <Image src={`data:image/png;base64,${photosByPost[0].content}`} fluid />
+                                     : <Image src={`/assets/dalmatian.jpg`} fluid /> }
                 <Segment style={postImageTextStyle} basic>
                     
                 </Segment>

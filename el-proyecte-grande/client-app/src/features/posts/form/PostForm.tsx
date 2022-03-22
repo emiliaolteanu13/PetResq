@@ -111,6 +111,20 @@ export default observer(function PostForm() {
         }
     }
 
+    const initialState = { alt: "", src: "" };
+    const [{ alt, src }, setPreview] = useState(initialState);
+
+    const fileHandler = (event: any) => {
+        const { files } = event.target;
+        setPreview(
+        files.length
+            ? {
+                src: URL.createObjectURL(files[0]),
+                alt: files[0].name,
+            }
+            : initialState
+        );
+    };
     
     if(loadingInitial) return <LoadingComponent />
  
@@ -157,7 +171,7 @@ export default observer(function PostForm() {
                         name='date'
                         dateFormat='MMMM d, yyyy'
                     />
-                    {/* <Dropzone/> */}
+                    
                    
                 <label> Choose a file </label>
                 <Button as="label" htmlFor="file" type="button" animated="fade">
@@ -165,7 +179,14 @@ export default observer(function PostForm() {
                     <Icon name="file" />
                 </Button.Content>
                 </Button>
-                    <input type="file" id="file" onChange={uploadMultipleFiles} multiple hidden />
+                    <input accept="image/*" type="file" id="file" onChange={(e) => {uploadMultipleFiles(e); fileHandler(e)}} multiple hidden />
+                    <div style={{display:'flex', flexDirection:'row'}}>
+                    <img className="preview" src={src} alt={alt} style={{width:300,
+                                                                        height:300,
+                                                                        paddingTop:15, 
+                                                                        paddingRight:15}} />
+                                                                        
+                    </div>
                 
                 
                     <Button
@@ -176,7 +197,7 @@ export default observer(function PostForm() {
                         content='Submit'
                         style={{padding: "7px"}}/>
                     <Button as={Link} to='/posts' floated='right' type='button' style={{padding: "7px"}} content='Cancel'/>
-                    
+                    {/* <Dropzone/> */}
                 </Form>
                 )}
             </Formik>
