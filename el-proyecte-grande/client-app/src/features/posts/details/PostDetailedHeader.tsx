@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { SyntheticEvent, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Button, Header, Item, Segment, Image } from 'semantic-ui-react'
 import { Post } from "../../../app/models/post";
@@ -28,18 +28,31 @@ export default observer(function PostDetailedHeader({ post }: Props) {
     const { deletePost } = postStore;
     const { user } = userStore;
     const [target, setTarget] = useState('');
+
+    const {petPhotoStore} = useStore();
+    const { loadPetPhotos, petPhotoRegistry} = petPhotoStore;
+    useEffect(()=>{
+        if(petPhotoRegistry.size <= 1) loadPetPhotos();
+        
+    }, [petPhotoRegistry.size, loadPetPhotos])
+    const photosByPost = Array.from(petPhotoRegistry.values()).filter(photo =>
+        photo.postId === post.id
+    )
+
+    console.log(Array.from(petPhotoRegistry.values()))
+    
     function handlePostDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         
         setTarget(e.currentTarget.name);
         deletePost(id).then(() => history.push('/posts'));
     }
 
-    
+    if(petPhotoStore.loadingInitial) return <LoadingComponent/>
 
     return (
         <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
-                <Image src={`/assets/dalmatian.jpg`} fluid />
+                <Image src={`data:image/png;base64,${photosByPost[0].content}`} fluid />
                 <Segment style={postImageTextStyle} basic>
                     
                 </Segment>
