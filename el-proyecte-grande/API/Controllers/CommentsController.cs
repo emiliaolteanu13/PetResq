@@ -1,19 +1,18 @@
+using System;
+using System.Threading.Tasks;
 using Application.Comments;
 using Application.Services;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 
 namespace API.Controllers
-{
-
+{ 
     [AllowAnonymous]
-    public class CommentController : BaseAPIController
+    public class CommentsController : BaseAPIController
     {
         private readonly EmailSenderService _emailSenderService;
-        public CommentController(EmailSenderService emailSenderService)
+        public CommentsController(EmailSenderService emailSenderService)
         {
             _emailSenderService = emailSenderService;
         }
@@ -27,9 +26,9 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateComment(Comment comment)
         {
-
             return HandleResult(await Mediator.Send(new Create.Command { Comment = comment, EmailSender=_emailSenderService }));
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteComment(Guid id)
         {

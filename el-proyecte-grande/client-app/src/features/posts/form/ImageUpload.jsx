@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useStore } from "../../../app/stores/store";
 import { useDropzone } from 'react-dropzone';
-import { v4 as uuid } from 'uuid';
 
 const baseStyle = {
   display: 'flex',
@@ -31,28 +29,8 @@ const rejectStyle = {
 
 function DropzoneComponent(props) {
   
-  const {petPhotoStore, commonStore} = useStore();
-  // const { petPhotoRegistry, createPetPhoto, loading, loadingInitial } = petPhotoStore;
   const [files, setFiles] = useState([]);
-  const {isSubmitted, postId} = props;
-  // const [photo, setPhoto] = useState<import('../../../app/models/petPhoto').PetPhoto>({
-  //   id: '',
-  //   file: null,
-  //   postId: postId
-  // })
-  // useEffect(() => {
-  //   if(isSubmitted){
-  //     files.forEach(file => {
-  //       let newPhoto = {
-  //         ...photo,
-  //         id: uuid()
-  //       }
-  //       newPhoto.file = file;
-  //       createPetPhoto(newPhoto);
-  //     })
-      
-  //   }
-  // }, [isSubmitted])
+  
   const onDrop = useCallback(acceptedFiles => {
     setFiles(acceptedFiles.map(file => Object.assign(file, {
       preview: URL.createObjectURL(file)

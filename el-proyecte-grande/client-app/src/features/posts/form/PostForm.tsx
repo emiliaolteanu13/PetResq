@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import { ChangeEventHandler, SyntheticEvent, useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
@@ -14,18 +14,18 @@ import { statusTypeOptions } from "../../../app/common/options/statusTypeOptions
 import MyDateInput from "../../../app/common/form/MyDateInput";
 import { Post } from "../../../app/models/post";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
-import { Button, Header, Segment } from "semantic-ui-react";
+import { Button, Header, Icon, Segment } from "semantic-ui-react";
 import Dropzone from './ImageUpload';
 
 
 export default observer(function PostForm() {
     const history = useHistory();
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const {postStore, commonStore} = useStore();
+    const {postStore, commonStore, petPhotoStore} = useStore();
     const { createPost, updatePost, loading, loadPost, loadingInitial } = postStore;
+    const {createPetPhoto} = petPhotoStore;
     const {id} = useParams<{id: string}>();
-    const [postId, setPostId] = useState('');
-    if(id) setPostId(id);
+    var fileObj : any[] = [];
+    var fileArray: string[] = [];
 
     function parseJwt (token : any) {
         var base64Url = token.split('.')[1];
@@ -66,15 +66,31 @@ export default observer(function PostForm() {
         if(id) loadPost(id).then(post => setPost(post!))
     }, [id, loadPost]);
 
-    function handleFormSubmit(post: Post) {
-        setIsSubmitted(true);
+    const uploadFiles = (postId : string) => {
+        fileObj.forEach(file => {
+            const petPhoto = new FormData();
+            
+            petPhoto.append(
+                "content",
+                file
+            )
+            petPhoto.append(
+                "postId",
+                postId
+            )
+            createPetPhoto(petPhoto);
+        })
+    }
+
+    function handleFormSubmit(post : Post) {
+        
         if(post.id.length === 0) {
             let newPost = {
                 ...post,
                 id: uuid()
             };
-            setPostId(newPost.id);
             newPost.location = address;
+            uploadFiles(newPost.id);
             createPost(newPost).then(() => history.push(`/posts/${newPost.id}`))
         } else {
             updatePost(post).then(() => history.push(`/posts/${post.id}`))
@@ -87,6 +103,17 @@ export default observer(function PostForm() {
         setCoordinates(latLng);
 
     }
+
+    const uploadMultipleFiles = (event: any)=> {
+        console.log(event.target.files)
+        fileObj.push(event.target.files[0])
+        console.log(fileObj)
+        // fileObj.push(event.currentTarget.value)
+        // for (let i = 0; i < fileObj[0].length; i++) {
+        //     fileArray.push(URL.createObjectURL(fileObj[0][i]))
+        // }
+    }
+
     
     if(loadingInitial) return <LoadingComponent />
  
@@ -133,7 +160,17 @@ export default observer(function PostForm() {
                         name='date'
                         dateFormat='MMMM d, yyyy'
                     />
-                    <Dropzone isSubmitted={isSubmitted} postId={postId}/>
+                    {/* <Dropzone/> */}
+                   
+                <label> Choose a file </label>
+                <Button as="label" htmlFor="file" type="button" animated="fade">
+                <Button.Content visible>
+                    <Icon name="file" />
+                </Button.Content>
+                </Button>
+                    <input type="file" id="file" onChange={uploadMultipleFiles} multiple hidden />
+                
+                
                     <Button
                         disabled={isSubmitting || !dirty || !isValid}
                         loading={loading} 

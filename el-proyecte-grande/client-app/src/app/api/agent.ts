@@ -7,7 +7,6 @@ import { User, UserFormValues } from "../models/user";
 import { history } from "../..";
 import { Comment } from "../models/comment";
 import { request } from "http";
-import { PetPhoto } from "../models/petPhoto";
 
 
 const sleep = (delay: number) => {
@@ -25,7 +24,7 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(async response => {
-    await sleep(3000);
+    // await sleep(3000);
     return response;
 }, (error: AxiosError) => {
     const { data, status, config} = error.response!;
@@ -90,15 +89,15 @@ const Account = {
 }
 
 const Comments = {
-    list: () => requests.get<Comment[]>('/comment'),
-    create: (comment: Comment) => axios.post<void>(`/comment`, comment),
-    update: (comment: Comment) => axios.put<void>(`/comment/${comment.id}`, comment),
-    delete : (id: string) => axios.delete<void>(`/comment/${id}`)
+    list: () => requests.get<Comment[]>('/comments'),
+    create: (comment: Comment) => axios.post<void>(`/comments`, comment),
+    update: (comment: Comment) => axios.put<void>(`/comments/${comment.id}`, comment),
+    delete : (id: string) => axios.delete<void>(`/comments/${id}`)
 }
 
 const PetPhotos = {
-    list: (postId: string) => requests.get<PetPhoto[]>(`/petPhotos/${postId}`),
-    create: (photo: any) => axios.post<void>(`/petPhotos`, photo)
+    list: (postId: string) => requests.get<any[]>(`/petPhotos/${postId}`),
+    create: (petPhoto : any) => axios.post<void>(`/petPhotos`, petPhoto)
 }
 
 

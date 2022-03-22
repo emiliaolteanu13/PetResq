@@ -36,7 +36,7 @@ export default observer(function PostDetailedChat({ post }: Props) {
             <Segment attached>
                 <Comment.Group>
                     {commentsByPost.map((comment) => (
-                        <Comment>
+                        <Comment key={comment.id}>
                             <Comment.Avatar src='/assets/logoDefault.png'/>
                         <Comment.Content>
                             <Comment.Author as='a'>{comment.username}</Comment.Author>

@@ -1,10 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
-import { PetPhoto } from "../models/petPhoto";
 
-export default class petPhotoStore{
-    petPhotoRegistry = new Map<string, PetPhoto>();
-    selectedPetPhoto : PetPhoto | undefined = undefined;
+export default class PetPhotoStore{
+    petPhotoRegistry = new Map<string, any>();
+    selectedPetPhoto : any | undefined = undefined;
     loading = false;
     loadingInitial = false;
 
@@ -31,7 +30,7 @@ export default class petPhotoStore{
         }
     }
 
-    createPetPhoto = async (petPhoto: PetPhoto) => {
+    createPetPhoto = async (petPhoto: any) => {
         this.loading = true;
         try {
             await agent.PetPhotos.create(petPhoto);

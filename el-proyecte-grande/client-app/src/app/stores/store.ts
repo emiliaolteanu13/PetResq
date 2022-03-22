@@ -2,6 +2,7 @@ import { useContext, createContext } from "react";
 import CommentStore from "./commentStore";
 import CommonStore from "./commonStore";
 import ModalStore from "./modalStore";
+import PetPhotoStore from "./petPhotoStore";
 import PostStore from "./postStore";
 
 import UserStore from "./userStore";
@@ -12,7 +13,7 @@ interface Store {
     userStore: UserStore;
     modalStore: ModalStore;
     commentStore: CommentStore;
-    
+    petPhotoStore: PetPhotoStore;
 }
 
 export const store: Store = {
@@ -21,7 +22,7 @@ export const store: Store = {
     userStore: new UserStore(),
     modalStore: new ModalStore(),
     commentStore: new CommentStore(),
-    
+    petPhotoStore: new PetPhotoStore()
 }
 
 export const StoreContext = createContext(store);
