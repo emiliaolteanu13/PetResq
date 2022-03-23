@@ -104,27 +104,45 @@ export default observer(function PostForm() {
 
     }
 
-    const uploadMultipleFiles = (event: any)=> {
+    // const uploadMultipleFiles = (event: any)=> {
       
-        for(let i = 0; i < event.target.files.length; i++){
-            fileObj.push(event.target.files[i]);
+    //     for(let i = 0; i < event.target.files.length; i++){
+    //         fileObj.push(event.target.files[i]);
+    //     }
+    // }
+    const [pics, setPics] = useState([{ alt: "", src: "" }]);
+
+    const toBase64 = (file : any) =>
+        new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+    
+    
+    // const [{ alt, src }, setPreview] = useState(initialState[0]);
+
+    const fileHandler = async (event: any) => {
+        
+        event.preventDefault();
+
+        const files = event.currentTarget.files;
+
+        let out : any [] = [];
+        for (let index = 0; index < files.length; index++) {
+            fileObj.push(files.item(index))
+            out.push({
+                alt: "",
+                src: await toBase64(files.item(index)),
+            });
         }
-    }
 
-    const initialState = { alt: "", src: "" };
-    const [{ alt, src }, setPreview] = useState(initialState);
+        setPics(out);
+        console.log(fileObj)
 
-    const fileHandler = (event: any) => {
-        const { files } = event.target;
-        setPreview(
-        files.length
-            ? {
-                src: URL.createObjectURL(files[0]),
-                alt: files[0].name,
-            }
-            : initialState
-        );
     };
+
     
     if(loadingInitial) return <LoadingComponent />
  
@@ -179,12 +197,12 @@ export default observer(function PostForm() {
                     <Icon name="file" />
                 </Button.Content>
                 </Button>
-                    <input accept="image/*" type="file" id="file" onChange={(e) => {uploadMultipleFiles(e); fileHandler(e)}} multiple hidden />
-                    <div style={{display:'flex', flexDirection:'row'}}>
-                    <img className="preview" src={src} alt={alt} style={{width:300,
-                                                                        height:300,
-                                                                        paddingTop:15, 
-                                                                        paddingRight:15}} />
+                    <input accept="image/*" name="files" type="file" id="file" onChange={fileHandler} multiple hidden />
+                    <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap:'1em'}}>
+                        {pics[0].src !== "" && pics.map((file, i) => (<img key={i} className="preview" src={file.src} alt={file.alt} style={{width:'100%', height:'100%', paddingBottom:'1em'}} />
+
+                        ))}
+                    
                                                                         
                     </div>
                 
