@@ -16,7 +16,7 @@ const sleep = (delay: number) => {
 }
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
-
+const ImageFolder = 'http://localhost:5000/images';
 axios.interceptors.request.use(config => {
     const token = store.commonStore.token;
     if (token) config.headers!.Authorization = `Bearer ${token}`
@@ -24,7 +24,7 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(async response => {
-    // await sleep(3000);
+    await sleep(1000);
     return response;
 }, (error: AxiosError) => {
     const { data, status, config} = error.response!;
@@ -105,7 +105,8 @@ const agent = {
     Posts,
     Account,
     Comments,
-    PetPhotos
+    PetPhotos,
+    ImageFolder
 }
 
 export default agent;

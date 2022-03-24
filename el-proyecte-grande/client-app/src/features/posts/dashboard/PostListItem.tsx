@@ -6,13 +6,14 @@ import { useStore } from '../../../app/stores/store';
 import {format} from 'date-fns';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { observer } from 'mobx-react-lite';
+import agent from '../../../app/api/agent'
 
 interface Props{
     post: Post
 }
 
 export default observer(function PostListItem({post}: Props) {
-
+    const ImageFolder = agent.ImageFolder;
     const {petPhotoStore} = useStore();
     const { loadPetPhotos, petPhotoRegistry} = petPhotoStore;
     useEffect(()=>{
@@ -29,7 +30,7 @@ export default observer(function PostListItem({post}: Props) {
                 <Item.Group>
                     <Item>
                         {photosByPost.length !== 0 ? 
-                        <Item.Image size='tiny' circular src={`data:image/png;base64,${photosByPost[0].content}`}/>
+                        <Item.Image size='tiny' circular src={`${ImageFolder}/${photosByPost[0].src}`}/>
                         : <Item.Image size='tiny' circular src={`/assets/dalmatian.jpg`}/>
                         }
                         

@@ -23,7 +23,7 @@ export default class PetPhotoStore{
             petPhotos.forEach(petPhoto => {
                 this.setPetPhoto(petPhoto);
             })
-            this.setLoadingInitial(false);    
+            this.setLoadingInitial(false);
         } catch (error) {
             console.log(error);
             this.setLoadingInitial(false);

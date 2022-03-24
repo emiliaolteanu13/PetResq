@@ -22,6 +22,8 @@ using API.Controllers.Extensions;
 using FluentValidation.AspNetCore;
 using API.Middleware;
 using Application.Services;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace API
 {
@@ -64,8 +66,7 @@ namespace API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
 
-            //app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseCors("CorsPolicy");

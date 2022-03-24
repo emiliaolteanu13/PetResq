@@ -19,19 +19,24 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePhoto([FromForm]IFormFile content,[FromForm] string postId )
+        public async Task<IActionResult> CreatePhoto([FromForm] IFormFile content, [FromForm] string postId)
         {
+            string fileName = content.FileName;
+            string folderName = @".\wwwroot\images";
             byte[] contentToBytes;
             using(var memoryStream = new MemoryStream())
             {
                 content.CopyTo(memoryStream);
                 contentToBytes = memoryStream.ToArray();
             }
+
+            string pathString = System.IO.Path.Combine(folderName, fileName);
+            System.IO.File.WriteAllBytes(pathString, contentToBytes);
             var id = new Guid();
             PetPhoto petPhoto = new()
             {
                 ID = id,
-                Content = contentToBytes,
+                Src = fileName,
                 PostId = postId
 
             };
