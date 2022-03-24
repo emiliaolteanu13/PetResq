@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
@@ -25,8 +25,6 @@ export default observer(function PostForm() {
     const {createPetPhoto} = petPhotoStore;
     const {id} = useParams<{id: string}>();
     var fileObj : any[] = [];
-    var previewFilesArray: any [] = [];
-    // var fileArray: string[] = [];
 
     function parseJwt (token : any) {
         var base64Url = token.split('.')[1];
@@ -67,8 +65,9 @@ export default observer(function PostForm() {
         if(id) loadPost(id).then(post => setPost(post!))
     }, [id, loadPost]);
 
-    const uploadFiles = (postId : string) => {
-        fileObj.forEach(file => {
+    const uploadFiles = (postId : string, files: any[]) => {
+
+        files.forEach(async file => {
             const petPhoto = new FormData();
             
             petPhoto.append(
@@ -79,19 +78,21 @@ export default observer(function PostForm() {
                 "postId",
                 postId
             )
-            createPetPhoto(petPhoto);
+            await createPetPhoto(petPhoto);
         })
     }
 
-    function handleFormSubmit(post : Post) {
-        
+    function handleFormSubmit( post : Post, e: any) {
+        debugger;
         if(post.id.length === 0) {
             let newPost = {
                 ...post,
                 id: uuid()
             };
             newPost.location = address;
-            uploadFiles(newPost.id);
+            
+            
+            uploadFiles(newPost.id, e.target.files.files);
             createPost(newPost).then(() => history.push(`/posts/${newPost.id}`))
         } else {
             updatePost(post).then(() => history.push(`/posts/${post.id}`))
@@ -105,12 +106,6 @@ export default observer(function PostForm() {
 
     }
 
-    // const uploadMultipleFiles = (event: any)=> {
-      
-    //     for(let i = 0; i < event.target.files.length; i++){
-    //         fileObj.push(event.target.files[i]);
-    //     }
-    // }
     const [pics, setPics] = useState([{ alt: "", src: "" }]);
 
     const toBase64 = (file : any) =>
@@ -132,16 +127,40 @@ export default observer(function PostForm() {
 
         let out : any [] = [];
         for (let index = 0; index < files.length; index++) {
-            previewFilesArray.push(files.item(index))
+            
+            fileObj.push(files.item(index))
             out.push({
                 alt: "",
                 src: await toBase64(files.item(index)),
             });
         }
-
+        debugger;
         setPics(out);
 
-    };
+    }; 
+    
+    
+    
+    // const [{ alt, src }, setPreview] = useState(initialState[0]);
+
+    // const fileHandler = async (event: any) => {
+        
+    //     event.preventDefault();
+
+    //     const files = event.currentTarget.files;
+
+    //     let out : any [] = [];
+    //     for (let index = 0; index < files.length; index++) {
+    //         fileObj.push(files.item(index))
+    //         out.push({
+    //             alt: "",
+    //             src: await toBase64(files.item(index)),
+    //         });
+    //     }
+    //     console.log(fileObj);
+    //     setPics(out);
+
+    // };
 
     
     if(loadingInitial) return <LoadingComponent />
@@ -155,7 +174,7 @@ export default observer(function PostForm() {
                 validationSchema={validationSchema}
                 enableReinitialize 
                 initialValues={post} 
-                onSubmit={values => handleFormSubmit(values)}>
+                onSubmit={( values, e) => handleFormSubmit(values, e)}>
                 {({handleSubmit, isValid, isSubmitting, dirty}) => (
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <MyTextInput name='title' placeholder='Title' />
@@ -189,7 +208,7 @@ export default observer(function PostForm() {
                         name='date'
                         dateFormat='MMMM d, yyyy'
                     />
-                    
+               
                    
                 <label> Choose a file </label>
                 <Button as="label" htmlFor="file" type="button" animated="fade">
@@ -198,14 +217,14 @@ export default observer(function PostForm() {
                 </Button.Content>
                 </Button>
                     <input accept="image/*" name="files" type="file" id="file" onChange={fileHandler} multiple hidden />
-                    <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap:'1em'}}>
+                    
+                <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap:'1em'}}>
                         {pics[0].src !== "" && pics.map((file, i) => (<img key={i} className="preview" src={file.src} alt={file.alt} style={{width:'100%', height:'100%', paddingBottom:'1em'}} />
 
                         ))}
                     
                                                                         
-                    </div>
-                
+                </div>
                 
                     <Button
                         disabled={isSubmitting || !dirty || !isValid}
