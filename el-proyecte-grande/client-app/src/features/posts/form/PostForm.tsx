@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { ChangeEventHandler, SyntheticEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
@@ -15,7 +15,7 @@ import MyDateInput from "../../../app/common/form/MyDateInput";
 import { Post } from "../../../app/models/post";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 import { Button, Header, Icon, Segment } from "semantic-ui-react";
-import Dropzone from './ImageUpload';
+//import Dropzone from './ImageUpload';
 
 
 export default observer(function PostForm() {
@@ -25,7 +25,8 @@ export default observer(function PostForm() {
     const {createPetPhoto} = petPhotoStore;
     const {id} = useParams<{id: string}>();
     var fileObj : any[] = [];
-    var fileArray: string[] = [];
+    var previewFilesArray: any [] = [];
+    // var fileArray: string[] = [];
 
     function parseJwt (token : any) {
         var base64Url = token.split('.')[1];
@@ -131,7 +132,7 @@ export default observer(function PostForm() {
 
         let out : any [] = [];
         for (let index = 0; index < files.length; index++) {
-            fileObj.push(files.item(index))
+            previewFilesArray.push(files.item(index))
             out.push({
                 alt: "",
                 src: await toBase64(files.item(index)),
@@ -139,7 +140,6 @@ export default observer(function PostForm() {
         }
 
         setPics(out);
-        console.log(fileObj)
 
     };
 
