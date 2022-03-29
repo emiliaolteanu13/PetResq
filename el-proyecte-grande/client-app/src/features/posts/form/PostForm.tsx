@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
@@ -15,7 +15,6 @@ import MyDateInput from "../../../app/common/form/MyDateInput";
 import { Post } from "../../../app/models/post";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 import { Button, Header, Icon, Segment } from "semantic-ui-react";
-//import Dropzone from './ImageUpload';
 
 
 export default observer(function PostForm() {
@@ -25,6 +24,7 @@ export default observer(function PostForm() {
     const {createPetPhoto} = petPhotoStore;
     const {id} = useParams<{id: string}>();
     var fileObj : any[] = [];
+    const fileInputEl = useRef(null);
 
     function parseJwt (token : any) {
         var base64Url = token.split('.')[1];
@@ -66,8 +66,8 @@ export default observer(function PostForm() {
     }, [id, loadPost]);
 
     const uploadFiles = (postId : string, files: any[]) => {
-
-        files.forEach(async file => {
+        let uploadedFiles = Array.from(files)
+        uploadedFiles.forEach(async file => {
             const petPhoto = new FormData();
             
             petPhoto.append(
@@ -92,7 +92,7 @@ export default observer(function PostForm() {
             newPost.location = address;
             
             
-            uploadFiles(newPost.id, e.target.files.files);
+            uploadFiles(newPost.id, fileInputEl.current.files);
             createPost(newPost).then(() => history.push(`/posts/${newPost.id}`))
         } else {
             updatePost(post).then(() => history.push(`/posts/${post.id}`))
@@ -115,9 +115,6 @@ export default observer(function PostForm() {
             reader.onload = () => resolve(reader.result);
             reader.onerror = (error) => reject(error);
         });
-    
-    
-    // const [{ alt, src }, setPreview] = useState(initialState[0]);
 
     const fileHandler = async (event: any) => {
         
@@ -138,30 +135,6 @@ export default observer(function PostForm() {
         setPics(out);
 
     }; 
-    
-    
-    
-    // const [{ alt, src }, setPreview] = useState(initialState[0]);
-
-    // const fileHandler = async (event: any) => {
-        
-    //     event.preventDefault();
-
-    //     const files = event.currentTarget.files;
-
-    //     let out : any [] = [];
-    //     for (let index = 0; index < files.length; index++) {
-    //         fileObj.push(files.item(index))
-    //         out.push({
-    //             alt: "",
-    //             src: await toBase64(files.item(index)),
-    //         });
-    //     }
-    //     console.log(fileObj);
-    //     setPics(out);
-
-    // };
-
     
     if(loadingInitial) return <LoadingComponent />
  
@@ -216,7 +189,7 @@ export default observer(function PostForm() {
                     <Icon name="file" />
                 </Button.Content>
                 </Button>
-                    <input accept="image/*" name="files" type="file" id="file" onChange={fileHandler} multiple hidden />
+                    <input accept="image/*" name="files" type="file" id="file" ref={fileInputEl} onChange={fileHandler} multiple hidden />
                     
                 <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap:'1em'}}>
                         {pics[0].src !== "" && pics.map((file, i) => (<img key={i} className="preview" src={file.src} alt={file.alt} style={{width:'100%', height:'100%', paddingBottom:'1em'}} />
@@ -234,7 +207,6 @@ export default observer(function PostForm() {
                         content='Submit'
                         style={{padding: "7px"}}/>
                     <Button as={Link} to='/posts' floated='right' type='button' style={{padding: "7px"}} content='Cancel'/>
-                    {/* <Dropzone/> */}
                 </Form>
                 )}
             </Formik>
