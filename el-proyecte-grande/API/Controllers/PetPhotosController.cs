@@ -21,7 +21,10 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePhoto([FromForm] IFormFile content, [FromForm] string postId)
         {
+            var id = new Guid();
+            
             string fileName = content.FileName;
+            string extension = Path.GetExtension(fileName);
             string folderName = @".\wwwroot\images";
             byte[] contentToBytes;
             using(var memoryStream = new MemoryStream())
@@ -29,14 +32,14 @@ namespace API.Controllers
                 content.CopyTo(memoryStream);
                 contentToBytes = memoryStream.ToArray();
             }
-
-            string pathString = System.IO.Path.Combine(folderName, fileName);
+            
+            string pathString = System.IO.Path.Combine(folderName, fileName.Replace(extension,"")+postId+extension);
             System.IO.File.WriteAllBytes(pathString, contentToBytes);
-            var id = new Guid();
+            
             PetPhoto petPhoto = new()
             {
                 ID = id,
-                Src = fileName,
+                Src = fileName.Replace(extension, "") + postId + extension,
                 PostId = postId
 
             };

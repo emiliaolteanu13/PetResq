@@ -58,6 +58,7 @@ export default observer(function PostDetailedHeader({ post }: Props) {
         },
         
    ];
+   
 
       
       const slideNumberStyle = {
@@ -122,11 +123,11 @@ export default observer(function PostDetailedHeader({ post }: Props) {
                             </Item.Content>
                         </Item>
                     </Item.Group>
-                    {user?.username==post.username &&
+                    {user?.username===post.username &&
                 <Button as={Link} to={`/edit/${post.id}`} color='orange' style={{padding: "7px", marginTop:"-6px"}} floated='right'> 
                     Edit Post
                 </Button>}
-                {user?.username==post.username &&
+                {user?.username===post.username &&
                 <Button color='red' onClick={(e) => handlePostDelete(e,post.id)} style={{padding: "7px", marginTop:"-15px"}} > Delete</Button>
 }
             </Segment>
