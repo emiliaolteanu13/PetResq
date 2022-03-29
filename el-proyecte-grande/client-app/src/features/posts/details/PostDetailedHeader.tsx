@@ -51,13 +51,18 @@ export default observer(function PostDetailedHeader({ post }: Props) {
     }
  
     ///carusel
-
-    const data = [
-        {
-          image: `${ImageFolder}/${photosByPost[0].src}`
-        },
+    const data = [];
+    if(photosByPost.length>0){
+        photosByPost.forEach(photo => {
+            data.push({
+                image: `${ImageFolder}/${photo.src}`
+              });
+        })
         
-   ];
+    }
+    else{
+        data.push({image: `/assets/dalmatian.jpg`})
+    }
    
 
       
