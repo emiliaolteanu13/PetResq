@@ -95,6 +95,7 @@ export default observer(function PostForm() {
             uploadFiles(newPost.id, fileInputEl.current.files);
             createPost(newPost).then(() => history.push(`/posts/${newPost.id}`))
         } else {
+            uploadFiles(post.id, fileInputEl.current.files);
             updatePost(post).then(() => history.push(`/posts/${post.id}`))
         }
     }
