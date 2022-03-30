@@ -144,7 +144,11 @@ footer {
 .masthead {
   display: flex;
   align-items: center;
-  background-image: url('../../../public/assets/cat-opens-eyes.gif') !important;
+  background-image: url('../../../public/assets/adopt-shelter-animals.gif') !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 120vh !important;
+  background-color: black !important;
   height: 100vh;
 }
 .masthead .ui.menu .ui.button,
