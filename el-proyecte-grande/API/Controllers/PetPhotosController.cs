@@ -45,5 +45,11 @@ namespace API.Controllers
             };
             return HandleResult(await Mediator.Send(new Create.Command { PetPhoto = petPhoto }));
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
+        }
     }
 }

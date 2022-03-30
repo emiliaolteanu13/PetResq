@@ -19,7 +19,7 @@ namespace Persistence
 
         public DbSet<Post> Posts { get; set; }
 
-        public DbSet<Photo> Photos { get; set; }  
+        public DbSet<ProfilePhoto> ProfilePhotos { get; set; } 
 
         public DbSet<Comment> Comments { get; set; }
         public DbSet<PetPhoto> PetPhotos { get; set; }
