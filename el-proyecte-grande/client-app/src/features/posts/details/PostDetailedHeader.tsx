@@ -47,6 +47,7 @@ export default observer(function PostDetailedHeader({ post }: Props) {
     function handlePostDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         
         setTarget(e.currentTarget.name);
+        
         deletePost(id).then(() => history.push('/posts'));
     }
  
@@ -133,7 +134,7 @@ export default observer(function PostDetailedHeader({ post }: Props) {
                     Edit Post
                 </Button>}
                 {user?.username===post.username &&
-                <Button color='red' onClick={(e) => handlePostDelete(e,post.id)} style={{padding: "7px", marginTop:"-15px"}} > Delete</Button>
+                <Button color='red' onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) handlePostDelete(e,post.id) }} style={{padding: "7px", marginTop:"-15px"}} > Delete</Button>
 }
             </Segment>
         </Segment.Group>
