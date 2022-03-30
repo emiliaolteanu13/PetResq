@@ -17,6 +17,7 @@ const sleep = (delay: number) => {
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 const ImageFolder = 'http://localhost:5000/images';
+const ProfileImageFolder = 'http://localhost:5000/profiles';
 axios.interceptors.request.use(config => {
     const token = store.commonStore.token;
     if (token) config.headers!.Authorization = `Bearer ${token}`
@@ -99,6 +100,10 @@ const PetPhotos = {
     list: () => requests.get<any[]>(`/petPhotos`),
     create: (petPhoto : any) => axios.post<void>(`/petPhotos`, petPhoto)
 }
+const ProfilePhotos = {
+    profilePhoto : (userEmail: string) => requests.get<any>(`/profilePhotos/${userEmail}`),
+    create : (profilePhoto: any) => axios.post<void>(`/profilePosts`, profilePhoto)
+}
 
 
 const agent = {
@@ -106,7 +111,9 @@ const agent = {
     Account,
     Comments,
     PetPhotos,
-    ImageFolder
+    ProfilePhotos,
+    ImageFolder,
+    ProfileImageFolder
 }
 
 export default agent;
