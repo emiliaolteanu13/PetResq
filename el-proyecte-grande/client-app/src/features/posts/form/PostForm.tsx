@@ -83,7 +83,6 @@ export default observer(function PostForm() {
     }
 
     function handleFormSubmit( post : Post, e: any) {
-        debugger;
         if(post.id.length === 0) {
             let newPost = {
                 ...post,
@@ -132,7 +131,6 @@ export default observer(function PostForm() {
                 src: await toBase64(files.item(index)),
             });
         }
-        debugger;
         setPics(out);
 
     }; 

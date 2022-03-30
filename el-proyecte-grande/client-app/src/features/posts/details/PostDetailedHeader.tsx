@@ -35,7 +35,7 @@ export default observer(function PostDetailedHeader({ post }: Props) {
     const {petPhotoStore} = useStore();
     const { loadPetPhotos, petPhotoRegistry} = petPhotoStore;
     useEffect(()=>{
-        if(petPhotoRegistry.size <= 1) loadPetPhotos();
+        if(petPhotoRegistry.size > 0) loadPetPhotos();
         
     }, [petPhotoRegistry.size, loadPetPhotos])
     const photosByPost = Array.from(petPhotoRegistry.values()).filter(photo =>
@@ -58,7 +58,7 @@ export default observer(function PostDetailedHeader({ post }: Props) {
                 image: `${ImageFolder}/${photo.src}`
               });
         })
-        
+      
     }
     else{
         data.push({image: `/assets/dalmatian.jpg`})
