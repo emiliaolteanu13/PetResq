@@ -10,12 +10,7 @@ export default observer(function ProfilePhotos() {
                 <Card>
                     <Image src={'/assets/user.png'} />
                 </Card>
-                <Card>
-                    <Image src={'/assets/user.png'} />
-                </Card>
-                <Card>
-                    <Image src={'/assets/user.png'} />
-                </Card>
+                
             </Card.Group>
             <Button as={Link} to='#' color='blue' style={{padding: "7px", marginTop:"-6px"}} floated='right' content='Add Photo' />
             <Button as={Link} to='#' color='orange' style={{padding: "7px", marginTop:"-6px"}} floated='right' content='Set as main' />  
