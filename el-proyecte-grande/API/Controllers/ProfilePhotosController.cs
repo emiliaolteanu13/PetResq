@@ -1,5 +1,6 @@
 ﻿using Application.ProfilePhotos;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,22 +9,13 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [AllowAnonymous]
     public class ProfilePhotosController : BaseAPIController
     {
-        [HttpGet("{userEmail}")]
-        public async Task<IActionResult> GetProfilePhoto(string userEmail)
+        [HttpGet("{username}")]
+        public async Task<IActionResult> GetProfilePhoto(string username)
         {
-            return HandleResult(await Mediator.Send(new Details.Query { UserEmail = userEmail }));
-        }
-
-        
-
-        // POST api/<ValuesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
+            return HandleResult(await Mediator.Send(new Details.Query { Username = username }));
         }
 
         [HttpPost]
@@ -48,7 +40,7 @@ namespace API.Controllers
             {
                 ID = id,
                 Src = fileName.Replace(extension, "") + userEmail + extension,
-                UserEmail = userEmail
+                Username = userEmail
 
             };
             return HandleResult(await Mediator.Send(new Create.Command { ProfilePhoto = profilePhoto }));

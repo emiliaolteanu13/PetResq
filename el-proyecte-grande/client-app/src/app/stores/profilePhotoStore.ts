@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 
 export default class ProfilePhotoStore{
-    selectedProfilePhoto : any | undefined = undefined;
+    selectedProfilePhoto : any = null;
     loading = false;
     loadingInitial = false;
 
@@ -10,12 +10,12 @@ export default class ProfilePhotoStore{
         makeAutoObservable(this)
     }
 
-    loadProfilePhoto = async (userEmail: string) => {
+    loadProfilePhoto = async (username: string) => {
+        this.selectedProfilePhoto = null;
         this.loadingInitial = true;
         try {
-            const profilePhoto = agent.ProfilePhotos.profilePhoto(userEmail)
-            
-            this.setProfilePhoto(profilePhoto);
+            const profilePhoto = await agent.ProfilePhotos.profilePhoto(username)
+            if(profilePhoto) this.setProfilePhoto(profilePhoto);
             this.setLoadingInitial(false);
         } catch (error) {
             console.log(error);

@@ -6,6 +6,6 @@ namespace Domain
     {
         public Guid ID { get; set; }
         public string Src { get; set; }
-        public string UserEmail { get; set; }
+        public string Username { get; set; }
     }
 }

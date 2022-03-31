@@ -101,7 +101,7 @@ const PetPhotos = {
     create: (petPhoto : any) => axios.post<void>(`/petPhotos`, petPhoto)
 }
 const ProfilePhotos = {
-    profilePhoto : (userEmail: string) => requests.get<any>(`/profilePhotos/${userEmail}`),
+    profilePhoto : (username: string) => requests.get<any>(`/profilePhotos/${username}`),
     create : (profilePhoto: any) => axios.post<void>(`/profilePosts`, profilePhoto)
 }
 

@@ -16,7 +16,7 @@ namespace Application.ProfilePhotos
     {
         public class Query : IRequest<Result<ProfilePhoto>>
         {
-            public string UserEmail { get; set; }
+            public string Username { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, Result<ProfilePhoto>>
@@ -29,7 +29,7 @@ namespace Application.ProfilePhotos
 
             public async Task<Result<ProfilePhoto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var photo = await _context.ProfilePhotos.Where(p => p.UserEmail == request.UserEmail).FirstOrDefaultAsync(cancellationToken: cancellationToken);
+                var photo = await _context.ProfilePhotos.Where(p => p.Username == request.Username).FirstOrDefaultAsync(cancellationToken: cancellationToken);
                 return Result<ProfilePhoto>.Success(photo);
             }
         }
