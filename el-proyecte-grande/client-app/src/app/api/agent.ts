@@ -65,12 +65,16 @@ axios.interceptors.response.use(async response => {
 
 const responseBody = <T> (response: AxiosResponse<T>) => response.data;
 
+
 const requests = {
     get : <T> (url: string) => axios.get<T>(url).then(responseBody),
     post : <T> (url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
     put : <T> (url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
     del : <T> (url: string) => axios.delete<T>(url).then(responseBody),
 }
+
+
+const APIKey = requests.get<string>('/posts/googleApiKey');
 
 const Posts = {
     list: () => requests.get<Post[]>('/posts'),
@@ -105,7 +109,6 @@ const ProfilePhotos = {
     create : (profilePhoto: any) => axios.post<void>(`/profilePosts`, profilePhoto)
 }
 
-
 const agent = {
     Posts,
     Account,
@@ -113,7 +116,8 @@ const agent = {
     PetPhotos,
     ProfilePhotos,
     ImageFolder,
-    ProfileImageFolder
+    ProfileImageFolder,
+    APIKey
 }
 
 export default agent;

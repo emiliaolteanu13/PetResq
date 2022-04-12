@@ -42,7 +42,6 @@ export default observer(function PostDetailedHeader({ post }: Props) {
         photo.postId === post.id
     )
 
-    console.log(Array.from(petPhotoRegistry.values()))
     if(petPhotoStore.loadingInitial) return <LoadingComponent/>
     function handlePostDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         

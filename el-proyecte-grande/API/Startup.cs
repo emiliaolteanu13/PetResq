@@ -33,6 +33,8 @@ namespace API
 
         private string _emailApiKey = null;
 
+        private string _googleApiKey = null;
+
         public Startup(IConfiguration config)
         {
             _config = config;
@@ -43,6 +45,9 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             _emailApiKey = _config["EmailApiKey"];
+            _googleApiKey = _config["GoogleAPIKey"];
+            services.AddSingleton(x =>
+                new GoogleLocationService(_googleApiKey));
             services.AddSingleton(x =>
                 new EmailSenderService(_emailApiKey));
             services.AddControllers(opt => {

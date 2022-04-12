@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Application.Posts;
+using Application.Services;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,17 @@ namespace API.Controllers
     [AllowAnonymous]
     public class PostsController : BaseAPIController
     {
+        private readonly GoogleLocationService _googleLocationService;
 
+        public PostsController(GoogleLocationService googleLocationService)
+        {
+            _googleLocationService = googleLocationService;
+        }
+        [HttpGet("googleApiKey")]
+        public async Task<string> GetApiKey()
+        {
+            return _googleLocationService.GoogleAPIKey;
+        }
         
         [HttpGet]
         public async Task<IActionResult> GetAllPosts()
