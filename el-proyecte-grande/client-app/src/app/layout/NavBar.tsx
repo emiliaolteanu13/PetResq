@@ -33,7 +33,7 @@ export default observer (function NavBar() {
                         <Dropdown.Menu>
                             <Dropdown.Item as={Link} to={`/profiles/${user?.username}`} 
                                 text='My Profile' icon='user' />
-                            <Dropdown.Item onClick={logout} text='Logout' icon='power' />
+                            <Dropdown.Item as={Link} onClick={logout} text='Logout' icon='power' />
                         </Dropdown.Menu>
                     </Dropdown>
                 </Menu.Item>

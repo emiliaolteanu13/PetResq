@@ -5,7 +5,7 @@ import ValidationErrors from './ValidationErrors';
 //import ValidationErrors from './ValidationErrors';
 
 export default function TestErrors() {
-    const baseUrl = 'http://localhost:5000/api/';
+    const baseUrl = 'https://localhost:44343/api/';
     const [errors, setErrors] = useState(null);
 
     function handleNotFound() {

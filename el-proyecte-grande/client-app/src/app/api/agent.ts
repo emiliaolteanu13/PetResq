@@ -15,9 +15,9 @@ const sleep = (delay: number) => {
     })
 }
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
-const ImageFolder = 'http://localhost:5000/images';
-const ProfileImageFolder = 'http://localhost:5000/profiles';
+axios.defaults.baseURL = 'https://localhost:44343/api';
+const ImageFolder = 'https://localhost:44343/images';
+const ProfileImageFolder = 'https://localhost:44343/profiles';
 axios.interceptors.request.use(config => {
     const token = store.commonStore.token;
     if (token) config.headers!.Authorization = `Bearer ${token}`
